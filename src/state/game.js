@@ -6,6 +6,7 @@ export default class Game extends Phaser.State {
 
     init() {
         console.log('init game state');
+        this.interval = 0
     }
 
     preload() {
@@ -23,7 +24,9 @@ export default class Game extends Phaser.State {
         this.interval += 1
         this.player.update();
         this.world.update();
-        if (!(this.interval % 100)) {
+
+        console.log(this.interval);
+        if (this.interval % 60 == 0) {
             this.world.accellerate();
             this.score.update()
             this.score.add(this.world.velocity*10)
