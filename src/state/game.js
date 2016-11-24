@@ -1,4 +1,5 @@
 import World from '../game/world'
+import Player from '../game/player';
 
 export default class Game extends Phaser.State {
 
@@ -13,10 +14,12 @@ export default class Game extends Phaser.State {
 
     create() {
         this.world = new World(this.game)
+        this.player = new Player(this.game);
     }
 
     update() {
-        this.world.update()
+        this.world.update();
+        this.player.update();
         // TODO update systems: collision
     }
 

@@ -14,11 +14,6 @@ export default class World {
         this.background.create(0, 0, 'sky')
         this.background.create(this.width, 0, 'sky')
 
-        this.rocketcorn = game.add.sprite(200, 200, 'rocketcorn')
-        this.rocketcorn.anchor = {x:.5,y:.5}
-        this.rocketcorn.angle = 20
-        this.rocketcorn.scale.x *= -1
-
 
         console.log(this);
 
