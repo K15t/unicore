@@ -25,7 +25,6 @@ export default class Game extends Phaser.State {
         this.player.update();
         this.world.update();
 
-        console.log(this.interval);
         if (this.interval % 60 == 0) {
             this.world.accellerate();
             this.score.update()
