@@ -1,15 +1,13 @@
-import Score from './score'
+import constants from '../constants';
 
 export default class World {
     constructor(game) {
 
         this.width = game.width
         this.height = game.height
-        this.velocity = 1
-        this.score = new Score()
+        this.velocity = constants.START_VELOCITY
 
         this.background = game.add.group()
-
         this.background.create(0, 0, 'sky')
         this.background.create(this.width, 0, 'sky')
 
@@ -25,7 +23,6 @@ export default class World {
 
     update() {
         this.moveBackground()
-        this.velocity += .01
     }
 
     moveBackground() {
@@ -33,5 +30,10 @@ export default class World {
             this.background.x = 0
         }
         this.background.x -= this.velocity
+    }
+
+    accellerate() {
+        this.moveBackground()
+        this.velocity += .1
     }
 }

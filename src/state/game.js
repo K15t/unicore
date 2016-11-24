@@ -22,9 +22,10 @@ export default class Game extends Phaser.State {
 
     update() {
         this.interval += 1
-        this.world.update();
         this.player.update();
+        this.world.update();
         if (!(this.interval % 100)) {
+            this.world.accellerate();
             this.score.update()
             this.score.add(this.world.velocity*10)
         }
