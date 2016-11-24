@@ -9,6 +9,8 @@ export default class Player {
         this.moving = true
         this.trail = []
 
+        this.coins = 0;
+
         this.rocketcorn = game.add.sprite(game.width/4, game.height/2, 'rocketcorn');
         this.rocketcorn.anchor = {x:.5,y:.5};
         this.rocketcorn.angle = 40;
@@ -18,6 +20,10 @@ export default class Player {
         this.rocketcorn.width = constants.ROCKETCORN_SIZE;
 
         this.rocketcorn.scale.x *= -1
+
+        this.rocketcorn.health = 10;
+
+        game.physics.arcade.enable(this.rocketcorn);
     }
 
     generateTrail() {
@@ -48,7 +54,7 @@ export default class Player {
         const game = this.game;
 
         const keyboard = this.getKeyboardControls();
-        const mouse = this.getMouseControls();
+        const mouse = 0; //this.getMouseControls();
 
         this.generateTrail()
 
@@ -67,9 +73,14 @@ export default class Player {
         const minPosition = game.height*.1 + constants.ROCKETCORN_SIZE / 2; // score bar is 60px high
         const maxPosition = game.height - constants.ROCKETCORN_SIZE / 2;
 
-
         // lock to bounds
         this.rocketcorn.y = Math.max(Math.min(newYPosition, maxPosition), minPosition);
+
+        if(this.rocketcorn.invulnerability > 0){
+            const blinkAlpha = (this.rocketcorn.invulnerability) % 30;
+            this.rocketcorn.alpha = blinkAlpha;
+            this.rocketcorn.invulnerability -= 1;
+        }
 
     }
 
@@ -83,5 +94,9 @@ export default class Player {
     // TODO
     getMouseControls() {
         return this.game.input.mouse.wheelDelta;
+    }
+
+    getSprite() {
+        return this.rocketcorn;
     }
 }
