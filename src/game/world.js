@@ -3,6 +3,7 @@ import constants from '../constants';
 export default class World {
     constructor(game) {
 
+        this.x = 0
         this.width = game.width
         this.height = game.height
         this.velocity = constants.START_VELOCITY
@@ -28,6 +29,7 @@ export default class World {
     moveBackground() {
         if (this.background.x < -this.width) {
             this.background.x = 0
+            this.x = this.background.x
         }
         this.background.x -= this.velocity
     }
