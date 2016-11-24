@@ -22,7 +22,7 @@ function create() {
     for(let stateName in gameStates){
         game.state.add(stateName, gameStates[stateName]);
     }
-    game.state.start('main');
+    game.state.start('menu');
 
     // TODO create world objects (player, obstacles, etc..)
 }

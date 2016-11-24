@@ -1,4 +1,4 @@
-import main from './menu';
+import menu from './menu';
 import game from './game';
 import highscore from './highscore';
 
