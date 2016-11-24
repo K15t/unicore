@@ -36,21 +36,13 @@
     "markdown-loader": "^0.1.7",
     "postcss-color-rgba-fallback": "^2.2.0",
     "postcss-loader": "^0.9.1",
-    "riot-compiler": "^2.5.5",
-    "riotjs-loader": "^3.0.0",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "animate.css": "^3.5.1",
-    "entities": "^1.1.1",
     "json-loader": "^0.5.4",
-    "normalize.css": "^4.2.0",
-    "prismjs": "^1.5.1",
-    "request": "^2.79.0",
-    "riot": "^2.4.1",
-    "riot-route": "^2.4.0"
+    "normalize.css": "^4.2.0"
   }
 }
