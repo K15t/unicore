@@ -4,16 +4,20 @@ export default class World {
         this.width = game.width
         this.height = game.height
         this.velocity = 1
+        this.score
 
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.stage.backgroundColor = '#4AAAFF';
-        this.background = game.add.sprite(0, 0, 'sky')
-        this.rocketcorn = game.add.sprite(100, 100, 'rocketcorn')
+        this.background = game.add.group()
+
+        this.background.create(0, 0, 'sky')
+        this.background.create(this.width, 0, 'sky')
+
+        this.rocketcorn = game.add.sprite(200, 200, 'rocketcorn')
         this.rocketcorn.anchor = {x:.5,y:.5}
-        this.rocketcorn.angle = 90
-        this.rocketcorn.scale.x = -1
-        this.rocketcorn.scale.y = -1
+        this.rocketcorn.angle = 20
+        this.rocketcorn.scale.x *= -1
 
 
         console.log(this);
