@@ -9,6 +9,7 @@ export default class Game extends Phaser.State {
     }
 
     preload() {
+        this.interval = 0
         this.game.load.image('sky', require('../assets/sky.jpg'))
         this.game.load.image('rocketcorn', require('../assets/rocketcorn.png'))
     }
@@ -20,9 +21,13 @@ export default class Game extends Phaser.State {
     }
 
     update() {
+        this.interval += 1
         this.world.update();
         this.player.update();
-        this.score.add(this.world.velocity*10)
+        if (!(this.interval % 100)) {
+            this.score.update()
+            this.score.add(this.world.velocity*10)
+        }
         // TODO update systems: collision
     }
 

@@ -1,3 +1,5 @@
+import leftPad from 'left-pad'
+
 export default class Score {
     constructor(game) {
         this.score = 0
@@ -8,11 +10,14 @@ export default class Score {
         scoreBar.drawRect(0,0,game.width,game.height*.1)
         scoreBar.endFill()
 
-        var score = game.add.text(game.width*.5,game.height*.05, this.score)
-        score.style.boundsAlignV = 'center'
+        this.scoreCounter = game.add.text(game.width*.5,game.height*.05, ''+this.score, {fill:'#fff', boundsAlignV:'center'})
     }
 
     add(amount) {
-        this.score += amount
+        this.score += parseInt(amount)
+    }
+
+    update() {
+        this.scoreCounter.text = leftPad(this.score, 10, 0)
     }
 }
