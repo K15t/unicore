@@ -9,9 +9,8 @@ export default class Game extends Phaser.State {
     }
 
     preload() {
-        this.interval = 0
-        this.game.load.image('sky', require('../assets/sky.jpg'))
-        this.game.load.image('rocketcorn', require('../assets/rocketcorn.png'))
+        this.game.load.image('sky', 'assets/images/sky.jpg')
+        this.game.load.image('rocketcorn', 'assets/images/rocketcorn.png')
     }
 
     create() {
