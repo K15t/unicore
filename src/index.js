@@ -10,7 +10,8 @@ const game = new Phaser.Game(800, 600, Phaser.CANVAS, 'unicore', { preload: prel
 
 function preload() {
     //game.stage.backgroundColor = '#007236';
-    game.load.image('image1', 'assets/sprites/image1.png');
+    game.load.image('startButton', 'assets/images/startButton.png');
+    game.load.image('highscoreButton', 'assets/images/buttons.png');
 }
 
 
