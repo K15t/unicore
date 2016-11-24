@@ -1,4 +1,5 @@
 import World from '../game/world'
+import Score from '../game/score'
 import Player from '../game/player';
 
 export default class Game extends Phaser.State {
@@ -15,11 +16,13 @@ export default class Game extends Phaser.State {
     create() {
         this.world = new World(this.game)
         this.player = new Player(this.game);
+        this.score = new Score(this.game)
     }
 
     update() {
         this.world.update();
         this.player.update();
+        this.score.add(this.world.velocity*10)
         // TODO update systems: collision
     }
 

@@ -1,3 +1,5 @@
+//export const SCORE = new Score()
+
 export default class Menu extends Phaser.State {
 
     init() {

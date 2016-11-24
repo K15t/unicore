@@ -1,19 +1,17 @@
+import Score from './score'
+
 export default class World {
     constructor(game) {
 
         this.width = game.width
         this.height = game.height
         this.velocity = 1
-        this.score
+        this.score = new Score()
 
-
-        game.physics.startSystem(Phaser.Physics.ARCADE);
-        game.stage.backgroundColor = '#4AAAFF';
         this.background = game.add.group()
 
         this.background.create(0, 0, 'sky')
         this.background.create(this.width, 0, 'sky')
-
 
         console.log(this);
 
@@ -27,6 +25,7 @@ export default class World {
 
     update() {
         this.moveBackground()
+        this.velocity += .01
     }
 
     moveBackground() {
