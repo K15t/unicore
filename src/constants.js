@@ -5,7 +5,7 @@ export default {
     GRAVITY: 4 * 60,
 
     ROCKETCORN_SIZE: 100,
-    START_LIVES: 1,
+    START_LIVES: 2,
     COINS_FOR_NEW_LIFE: 10,
     INVULNERABILITY_TIME: 2,
 
@@ -13,6 +13,11 @@ export default {
 
     SPAWN_OBSTACLES_EVERY_SEC: 2,
     SPAWN_PICKUPS_EVERY_SEC: 1,
+
+    POWERUP_SLOWDOWN: 0.75,
+    POWERUP_INVULNERABILITY_DURATION: 6,
+
+    POWERUPS: [ 'OFCE', 'VSN', 'ALX', 'BAC', 'TRSL' ],
 
     REST_URL: 'https://unicore-score.herokuapp.com/scores'
 };

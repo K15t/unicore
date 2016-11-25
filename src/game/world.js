@@ -66,19 +66,35 @@ export default class World {
             this.timeSinceLastObstacle = 0;
         }
 
-        if( this.obstacleSpawner > this.game.height || this.obstacleSpawner < this.game.height * 0.1){
-            this.obstacleSpawnerDirection *= -1;
+        if( this.obstacleSpawner > this.game.height ){
+            this.obstacleSpawnerDirection = -1;
+        }else if( this.obstacleSpawner < this.game.height * 0.1){
+            this.obstacleSpawnerDirection = 1;
         }
         this.obstacleSpawner += this.obstacleSpawnerDirection * this.obstacleSpawnerSpeed;
         this.obstacleSpawnerSpeed = Math.random() * 5;
 
-        const spawnPickup = !(Math.floor(Math.random() * 60 * constants.SPAWN_PICKUPS_EVERY_SEC));
+        const spawnPickup = !(Math.floor(Math.random() * 60 * constants.SPAWN_PICKUPS_EVERY_SEC * spawnSpeedModifier));
 
         if(spawnPickup){
+            const isCoin = !!Math.floor(Math.random() * 2);
+
+            let pickupType = 'coin';
+            if(!isCoin){
+                const powerupSpriteIndex = Math.floor( Math.random() * constants.POWERUPS.length );
+                pickupType = constants.POWERUPS[powerupSpriteIndex];
+            }
+
             const yPos = 60 + Math.random() * 600;
-            const newPickup = this.game.add.sprite( this.x + 800, yPos, 'pickup' );
+            const newPickup = this.game.add.sprite( this.x + 800, yPos, pickupType );
             this.game.physics.arcade.enable(newPickup);
             newPickup.body.allowGravity = false;
+
+            newPickup.pickupType = pickupType;
+
+            newPickup.height = 70;
+            newPickup.width = 70;
+
             this.pickups.push(newPickup);
         }
     }

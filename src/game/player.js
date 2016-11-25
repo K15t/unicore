@@ -7,7 +7,8 @@ export default class Player {
         this.velocity = 1;
         this.y = 0
         this.moving = true
-        this.trail = []
+        this.trail = [];
+        this.trailGroup = undefined;
 
         this.coins = 0;
 
@@ -53,6 +54,7 @@ export default class Player {
         trail.x = 0;
         trail.y = 0;
         this.trail.unshift(trail)
+        this.trailGroup = trail;
     }
 
     generateInitialTrail() {
@@ -106,9 +108,31 @@ export default class Player {
             this.rocketcorn.body.gravity.y -= boost;
 
             if (this.rocketcorn.invulnerability > 0) {
-                const blinkAlpha = (this.rocketcorn.invulnerability) % 30;
-                this.rocketcorn.alpha = blinkAlpha;
+                const blinkAlpha = ((this.rocketcorn.invulnerability) / 20) % 2;
+                const alpha =  blinkAlpha > 1 ? 1 : 0;
+                this.rocketcorn.alpha = alpha;
+
+                /*
+                if(this.invulnerabilityType === 'hurt'){
+                    this.rocketcorn.tint = 0xFFFF00;
+                }else{
+                    const tintArray = [0xf28582,0xe2e04d,0x74af28,0x50b9ff,0xa797db];
+                    const tintIndexBlink = blinkAlpha * tintArray.length;
+                    this.rocketcorn.tint = tintArray[tintIndexBlink];
+                }
+                */
+
+                this.trail.forEach((t) => {
+                    t.alpha = alpha;
+                });
                 this.rocketcorn.invulnerability -= 1;
+
+            }else{
+                this.rocketcorn.tint = 0xFFFFFF;
+                this.rocketcorn.alpha = 1;
+                this.trail.forEach((t) => {
+                    t.alpha = 1;
+                });
             }
         }
     }

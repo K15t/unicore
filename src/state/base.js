@@ -15,7 +15,11 @@ export default class Base extends Phaser.State {
         this.game.load.image('sky', 'assets/images/sky.jpg')
         this.game.load.image('rocketcorn', 'assets/images/rocketcorn.png')
         this.game.load.image('obstacle', 'assets/images/obstacle.png')
-        this.game.load.image('pickup', 'assets/images/coin.png')
+        this.game.load.image('coin', 'assets/images/coin.png');
+        constants.POWERUPS.forEach((pu) => {
+            this.game.load.image(pu, 'assets/images/'+ pu +'.png');
+        });
+
     }
 
     create() {
@@ -43,16 +47,6 @@ export default class Base extends Phaser.State {
         }
     }
 
-    render(){
-        this.game.debug.body(this.player.getSprite(), '#FFFFFF',false);
-        const pickups = this.world.getPickups();
-        pickups.forEach((p) => {
-            this.game.debug.body(p, '#00FF00',false);
-        });
-
-        this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
-
-    }
 
     checkCollisions(gameoverCallback) {
         const game = this.game;
@@ -73,6 +67,7 @@ export default class Base extends Phaser.State {
                 player.damage(1);
                 if (player.alive) {
                     player.invulnerability = 60 * constants.INVULNERABILITY_TIME;
+                    player.invulnerabilityType = 'hurt';
                 } else {
                     gameoverCallback.call(this);
                 }
@@ -85,16 +80,32 @@ export default class Base extends Phaser.State {
     collidePickup(player, playerSprite, pickup) {
         // TODO: powerups
 
+        if(pickup.pickupType === 'coin'){
+            player.coins++;
 
-        player.coins++;
+            if(player.coins >= constants.COINS_FOR_NEW_LIFE){
+                player.coins -= constants.COINS_FOR_NEW_LIFE;
+                playerSprite.heal(1);
+            }
 
-        if(player.coins >= constants.COINS_FOR_NEW_LIFE){
-            player.coins -= constants.COINS_FOR_NEW_LIFE;
-            playerSprite.heal(1);
+
+        }else{
+            switch(pickup.pickupType){
+                case 'TRSL':
+                case 'VSN':
+                    playerSprite.invulnerability = constants.POWERUP_INVULNERABILITY_DURATION * 60;
+                    playerSprite.invulnerabilityType = 'powerup';
+                    break;
+                case 'ALX':
+                case 'BAC':
+                case 'OFCE':
+                    this.world.velocity *= constants.POWERUP_SLOWDOWN;
+                    break;
+            }
         }
 
-        pickup.body.destroy();
-        pickup.kill();
+        pickup.destroy();
+
     }
 
     gameover() {
