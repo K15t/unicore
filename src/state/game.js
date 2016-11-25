@@ -21,9 +21,6 @@ export default class Game extends BaseState {
         super.create();
 
         this.isPlaying = true;
-        setTimeout(()=>{
-            this.state.start('highscore')
-        }, 2000)
     }
 
     gameover() {

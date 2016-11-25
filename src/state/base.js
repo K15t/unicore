@@ -49,6 +49,8 @@ export default class Base extends Phaser.State {
             this.game.debug.body(p, '#00FF00',false);
         });
 
+        this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
+
     }
 
     checkCollisions(gameoverCallback) {

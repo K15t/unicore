@@ -8,11 +8,27 @@ const gameStates = require('./state').default;
 
 const game = new Phaser.Game(800, 600, Phaser.CANVAS, 'unicore', { preload: preload, create: create, update: update, render: render });
 
+
+window.WebFontConfig = {
+    active: function() { },
+
+    google: {
+        families: ['Bungee']
+    }
+
+};
+
+
 function preload() {
     //game.stage.backgroundColor = '#007236';
     game.load.image('startButton', 'assets/images/startButton.png');
     game.load.image('highscoreButton', 'assets/images/highscoreButton.png');
+
+    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 }
+
+
+
 
 
 
