@@ -18,6 +18,7 @@ export default {
     POWERUP_INVULNERABILITY_DURATION: 6,
 
     POWERUPS: [ 'OFCE', 'VSN', 'ALX', 'BAC', 'TRSL' ],
+    OBSTACLES: [ 'feindbild1', 'feindbild2', 'feindbild3' ],
 
     REST_URL: 'https://unicore-score.herokuapp.com/scores'
 };

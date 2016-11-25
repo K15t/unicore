@@ -56,11 +56,19 @@ export default class World {
         let spawnObstacle = this.timeSinceLastObstacle > constants.SPAWN_OBSTACLES_EVERY_SEC;
 
         if(spawnObstacle){
+            const powerupSpriteIndex = Math.floor( Math.random() * constants.OBSTACLES.length );
+            const obstacleType = constants.OBSTACLES[powerupSpriteIndex];
+
             const yPos = this.obstacleSpawner;
-            const newObstacle = this.game.add.sprite( this.x + 800, yPos, 'obstacle' );
+            const newObstacle = this.game.add.sprite( this.x + 800, yPos, obstacleType );
             this.game.physics.arcade.enable(newObstacle);
 
             newObstacle.body.allowGravity = false;
+
+
+            newObstacle.height = 100;
+            newObstacle.width = 100;
+
             this.obstacles.push(newObstacle);
 
             this.timeSinceLastObstacle = 0;

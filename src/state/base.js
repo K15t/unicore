@@ -19,6 +19,9 @@ export default class Base extends Phaser.State {
         constants.POWERUPS.forEach((pu) => {
             this.game.load.image(pu, 'assets/images/'+ pu +'.png');
         });
+        constants.OBSTACLES.forEach((pu) => {
+            this.game.load.image(pu, 'assets/images/'+ pu +'.png');
+        });
 
     }
 
