@@ -10,7 +10,7 @@ export default class Score {
         scoreBar.drawRect(0,0,game.width,game.height*.1)
         scoreBar.endFill()
 
-        this.scoreCounter = game.add.text(game.width*.5,game.height*.05, ''+this.score, {fill:'#fff', boundsAlignV:'center'})
+        this.scoreCounter = game.add.text(game.width*.5,game.height*.025, ''+this.score, {fill:'#fff', boundsAlignV:'center'})
     }
 
     add(amount) {
@@ -18,6 +18,10 @@ export default class Score {
     }
 
     update() {
-        this.scoreCounter.text = leftPad(this.score, 10, 0)
+        this.scoreCounter.text = 'SCORE - ' + leftPad(this.score, 10, 0)
+    }
+
+    upload() {
+        
     }
 }

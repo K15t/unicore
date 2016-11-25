@@ -95,7 +95,7 @@ export default class Base extends Phaser.State {
     }
 
     gameover() {
-        console.log("GAMEOVER");
+        
     }
 
     shutdown() {
