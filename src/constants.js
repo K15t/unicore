@@ -7,5 +7,7 @@ export default {
     ROCKETCORN_SIZE: 100,
     START_LIVES: 1,
     COINS_FOR_NEW_LIFE: 10,
-    INVULNERABILITY_TIME: 2
+    INVULNERABILITY_TIME: 2,
+
+    REST_URL: 'https://unicore-score.herokuapp.com/scores'
 };
