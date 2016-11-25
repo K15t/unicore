@@ -64,7 +64,7 @@ export default class Base extends Phaser.State {
             game.physics.arcade.overlap(playerSprite, obstacle, this.collideObstacle.bind(this, gameoverCallback, playerSprite));
         });
 
-        game.physics.arcade.overlap(playerSprite, pickups, this.collidePickup.bind(this));
+        game.physics.arcade.overlap(playerSprite, pickups, this.collidePickup.bind(this, this.player));
     }
 
     collideObstacle(gameoverCallback, player) {
@@ -82,7 +82,7 @@ export default class Base extends Phaser.State {
         }
     }
 
-    collidePickup(player, pickup) {
+    collidePickup(player, playerSprite, pickup) {
         // TODO: powerups
 
 
@@ -90,7 +90,7 @@ export default class Base extends Phaser.State {
 
         if(player.coins >= constants.COINS_FOR_NEW_LIFE){
             player.coins -= constants.COINS_FOR_NEW_LIFE;
-            player.lives += 1;
+            playerSprite.heal(1);
         }
 
         pickup.body.destroy();

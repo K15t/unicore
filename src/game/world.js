@@ -16,6 +16,11 @@ export default class World {
         this.obstacles = [];
         this.pickups = [];
 
+        this.timeSinceLastObstacle = 0;
+        this.obstacleSpawner = game.height / 2;
+        this.obstacleSpawnerDirection = 1;
+        this.obstacleSpawnerSpeed = 1;
+
         game.world.bounds.height = game.height  * 0.9;
         game.world.bounds.y = game.height  * 0.1;
 
@@ -43,24 +48,35 @@ export default class World {
     }
 
     spawnNewWorldObjects(){
-        // TODO better spawn positioning
-        const spawnObstacle = !(Math.floor(Math.random() * 60 * 1));
+        let spawnSpeedModifier = 1;
+        if(this.velocity > 4){
+            spawnSpeedModifier = Math.sqrt(Math.sqrt(this.velocity));
+        }
+        this.timeSinceLastObstacle += ((this.game.time.elapsedMS) * spawnSpeedModifier) / 1000;
+        let spawnObstacle = this.timeSinceLastObstacle > constants.SPAWN_OBSTACLES_EVERY_SEC;
 
         if(spawnObstacle){
-            const yPos = 60 + Math.random() * 600;
+            const yPos = this.obstacleSpawner;
             const newObstacle = this.game.add.sprite( this.x + 800, yPos, 'obstacle' );
             this.game.physics.arcade.enable(newObstacle);
 
             newObstacle.body.allowGravity = false;
             this.obstacles.push(newObstacle);
+
+            this.timeSinceLastObstacle = 0;
         }
 
-        // TODO: pickups
-        const spawnPickup = !(Math.floor(Math.random() * 60 * 1));
+        if( this.obstacleSpawner > this.game.height || this.obstacleSpawner < this.game.height * 0.1){
+            this.obstacleSpawnerDirection *= -1;
+        }
+        this.obstacleSpawner += this.obstacleSpawnerDirection * this.obstacleSpawnerSpeed;
+        this.obstacleSpawnerSpeed = Math.random() * 5;
+
+        const spawnPickup = !(Math.floor(Math.random() * 60 * constants.SPAWN_PICKUPS_EVERY_SEC));
 
         if(spawnPickup){
             const yPos = 60 + Math.random() * 600;
-            const newPickup = this.game.add.sprite( this.x + 700, yPos, 'pickup' );
+            const newPickup = this.game.add.sprite( this.x + 800, yPos, 'pickup' );
             this.game.physics.arcade.enable(newPickup);
             newPickup.body.allowGravity = false;
             this.pickups.push(newPickup);

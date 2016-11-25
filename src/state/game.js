@@ -13,6 +13,7 @@ export default class Game extends BaseState {
         this.highScore = score
     }
 
+
     update() {
         super.update(this.gameover);
     }
@@ -23,12 +24,16 @@ export default class Game extends BaseState {
             this.score.highScore = this.highScore
         }
         this.isPlaying = true;
+        this.lifeCounter = this.game.add.text(this.game.width*.1,this.game.height*.025, 'Lives: 1', {fill:'#fff', boundsAlignV:'center'})
+    }
+
+    render(){
+        super.render();
+        this.lifeCounter.text = 'Lives: ' + (~~this.player.getSprite().health);
     }
 
     gameover() {
-        this.state.start('highscore', true, false, this.score.score)
-
-        console.log("GAMEOVER");
+        this.state.start('highscore', true, false, this.score.score);
     }
 
     shutdown() {
