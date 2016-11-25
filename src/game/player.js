@@ -50,7 +50,7 @@ export default class Player {
         }
     }
 
-    update() {
+    update(isPlaying) {
         const game = this.game;
 
         const keyboard = this.getKeyboardControls();
@@ -67,21 +67,22 @@ export default class Player {
         } else {
             this.moving = true
         }
-        this.velocity = verticalMovement * constants.VERTICAL_VELOCITY;
-        const newYPosition = this.rocketcorn.y + this.velocity;
+        if(isPlaying) {
+            this.velocity = verticalMovement * constants.VERTICAL_VELOCITY;
+            const newYPosition = this.rocketcorn.y + this.velocity;
 
-        const minPosition = game.height*.1 + constants.ROCKETCORN_SIZE / 2; // score bar is 60px high
-        const maxPosition = game.height - constants.ROCKETCORN_SIZE / 2;
+            const minPosition = game.height * .1 + constants.ROCKETCORN_SIZE / 2; // score bar is 60px high
+            const maxPosition = game.height - constants.ROCKETCORN_SIZE / 2;
 
-        // lock to bounds
-        this.rocketcorn.y = Math.max(Math.min(newYPosition, maxPosition), minPosition);
+            // lock to bounds
+            this.rocketcorn.y = Math.max(Math.min(newYPosition, maxPosition), minPosition);
 
-        if(this.rocketcorn.invulnerability > 0){
-            const blinkAlpha = (this.rocketcorn.invulnerability) % 30;
-            this.rocketcorn.alpha = blinkAlpha;
-            this.rocketcorn.invulnerability -= 1;
+            if (this.rocketcorn.invulnerability > 0) {
+                const blinkAlpha = (this.rocketcorn.invulnerability) % 30;
+                this.rocketcorn.alpha = blinkAlpha;
+                this.rocketcorn.invulnerability -= 1;
+            }
         }
-
     }
 
     getKeyboardControls() {

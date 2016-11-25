@@ -17,11 +17,13 @@ export default class World {
         this.pickups = [];
     }
 
-    update() {
+    update(isPlaying) {
         this.moveBackground();
-        this.spawnNewWorldObjects();
-        this.moveWorldObjects();
-        this.despawnOldWorldObjects();
+        if(isPlaying) {
+            this.spawnNewWorldObjects();
+            this.moveWorldObjects();
+            this.despawnOldWorldObjects();
+        }
     }
 
     moveBackground() {

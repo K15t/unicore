@@ -2,85 +2,22 @@ import World from '../game/world'
 import Score from '../game/score'
 import Player from '../game/player';
 
+import BaseState from './base';
+
 import constants from '../constants';
 
-export default class Game extends Phaser.State {
+export default class Game extends BaseState {
 
     init() {
         this.interval = 0;
 
     }
 
-    preload() {
-        this.game.load.image('sky', 'assets/images/sky.jpg')
-        this.game.load.image('rocketcorn', 'assets/images/rocketcorn.png')
-        this.game.load.image('obstacle', 'assets/images/obstacle.png')
-        this.game.load.image('pickup', 'assets/images/coin.png')
-    }
 
     create() {
-        this.world = new World(this.game)
-        this.player = new Player(this.game);
-        this.score = new Score(this.game)
+        super.create();
 
-        this.game.physics.startSystem(Phaser.Physics.ARCADE);
-    }
-
-    update() {
-        this.interval += 1
-        this.player.update();
-        this.world.update();
-
-        if (this.interval % 60 == 0) {
-            this.world.accellerate();
-            this.score.update()
-            this.score.add(this.world.velocity * 10)
-        }
-
-        this.checkCollisions();
-    }
-
-    checkCollisions() {
-        const game = this.game;
-        const playerSprite = this.player.getSprite();
-        const obstacles = this.world.getObstacles();
-        const pickups = this.world.getPickups();
-
-        obstacles.forEach((obstacle) => {
-            game.physics.arcade.overlap(playerSprite, obstacle, this.collideObstacle.bind(this, playerSprite));
-        }, this);
-
-        game.physics.arcade.overlap(playerSprite, pickups, this.collidePickup.bind(this));
-    }
-
-    collideObstacle(player) {
-        if(player.invulnerability <= 0) {
-            if (player.health > 0) {
-                player.damage(1);
-                if (player.alive) {
-                    player.invulnerability = 60 * constants.INVULNERABILITY_TIME;
-                } else {
-                    this.gameover();
-                }
-            } else {
-                this.gameover();
-            }
-        }
-    }
-
-    collidePickup(player, pickup) {
-        // TODO: powerups
-
-        pickup
-
-        player.coins++;
-
-        if(player.coins >= constants.COINS_FOR_NEW_LIFE){
-            player.coins -= constants.COINS_FOR_NEW_LIFE;
-            player.lives += 1;
-        }
-
-        pickup.kill();
+        this.isPlaying = true;
     }
 
     gameover() {

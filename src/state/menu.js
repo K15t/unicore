@@ -1,16 +1,19 @@
 //export const SCORE = new Score()
 
-export default class Menu extends Phaser.State {
+import BaseState from './base';
+
+export default class Menu extends BaseState {
 
     init() {
         console.log('init main state');
     }
 
-    preload() {
-
-    }
 
     create() {
+        super.create();
+
+        this.isPlaying = false;
+
         const game = this.game;
 
         const startButton = game.add.button(game.world.centerX - 100, 200, 'startButton', this.gotoGameState.bind(this));
@@ -18,13 +21,9 @@ export default class Menu extends Phaser.State {
     }
 
     update() {
-        // go to different state with this.state.start()
-        //this.state.start('game');
+        super.update();
     }
 
-    shutdown() {
-
-    }
 
 
     gotoGameState() {
