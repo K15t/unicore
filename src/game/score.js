@@ -46,17 +46,21 @@ export default class Score {
             var text = ''
             for (var score in scores) {
                 score = scores[score]
-                text += `${score.user} - ${leftPad(score.score,7,0)}\n`
+                text += `${this.trimName(score.user)} - ${leftPad(score.score,7,0)}\n`
             }
             this.game.add.text(this.game.width*.25,this.game.height*.2, text, {fill:'#fff', boundsAlignV:'center'})
         })
+    }
+
+    trimName(name) {
+        return name.substr(0,constants.MAX_NAME_LENGTH)
     }
 
     upload(score, name, resolve) {
         if (localStorage.getItem('highscore') < score) {
             localStorage.setItem('highscore', score)
         }
-        request.post({url:constants.REST_URL, body:`{"score":${score},"user":"${name}"}`, json:true}, (error, response, body)=>{
+        request.post({url:constants.REST_URL, body:`{"score":${score},"user":"${this.trimName(name)}"}`, json:true}, (error, response, body)=>{
             resolve()
         })
     }

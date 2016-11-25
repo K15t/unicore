@@ -9,5 +9,7 @@ export default {
     COINS_FOR_NEW_LIFE: 10,
     INVULNERABILITY_TIME: 2,
 
+    MAX_NAME_LENGTH: 5,
+
     REST_URL: 'https://unicore-score.herokuapp.com/scores'
 };

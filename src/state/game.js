@@ -19,7 +19,7 @@ export default class Game extends BaseState {
 
     create() {
         super.create();
-        if (this.highScore) {
+        if (this.highScore > this.score.getHighScore()) {
             this.score.highScore = this.highScore
         }
         this.isPlaying = true;
