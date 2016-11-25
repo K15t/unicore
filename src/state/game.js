@@ -13,6 +13,9 @@ export default class Game extends BaseState {
 
     }
 
+    update() {
+        super.update(this.gameover);
+    }
 
     create() {
         super.create();

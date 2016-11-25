@@ -88,7 +88,7 @@ export default class World {
         this.pickups.filter(deadFilter).forEach(killFunction);
 
         this.obstacles = this.obstacles.filter(aliveFilter);
-        this.obstacles = this.pickups.filter(aliveFilter);
+        this.pickups = this.pickups.filter(aliveFilter);
     }
 
     getPickups(){

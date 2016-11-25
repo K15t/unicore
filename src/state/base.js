@@ -26,7 +26,7 @@ export default class Base extends Phaser.State {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
     }
 
-    update() {
+    update(gameoverCallback) {
         this.interval += 1
         this.player.update(this.isPlaying);
         this.world.update(this.isPlaying);
@@ -38,7 +38,7 @@ export default class Base extends Phaser.State {
                 this.score.add(this.world.velocity * 10)
             }
 
-            this.checkCollisions();
+            this.checkCollisions(gameoverCallback || this.gameover);
         }
     }
 
@@ -51,30 +51,30 @@ export default class Base extends Phaser.State {
 
     }
 
-    checkCollisions() {
+    checkCollisions(gameoverCallback) {
         const game = this.game;
         const playerSprite = this.player.getSprite();
         const obstacles = this.world.getObstacles();
         const pickups = this.world.getPickups();
 
         obstacles.forEach((obstacle) => {
-            game.physics.arcade.overlap(playerSprite, obstacle, this.collideObstacle.bind(this, playerSprite));
-        }, this);
+            game.physics.arcade.overlap(playerSprite, obstacle, this.collideObstacle.bind(this, gameoverCallback, playerSprite));
+        });
 
         game.physics.arcade.overlap(playerSprite, pickups, this.collidePickup.bind(this));
     }
 
-    collideObstacle(player) {
+    collideObstacle(gameoverCallback, player) {
         if(player.invulnerability <= 0) {
             if (player.health > 0) {
                 player.damage(1);
                 if (player.alive) {
                     player.invulnerability = 60 * constants.INVULNERABILITY_TIME;
                 } else {
-                    this.gameover();
+                    gameoverCallback();
                 }
             } else {
-                this.gameover();
+                gameoverCallback();
             }
         }
     }

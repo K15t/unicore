@@ -20,10 +20,6 @@ export default class Menu extends BaseState {
         const highscoreButton = game.add.button(game.world.centerX - 100, 400, 'highscoreButton', this.gotoHigscoreState.bind(this), 0, 1, 2);
     }
 
-    update() {
-        super.update();
-    }
-
 
 
     gotoGameState() {
