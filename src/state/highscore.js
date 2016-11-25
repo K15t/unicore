@@ -15,13 +15,13 @@ export default class Highscore extends BaseState {
         super.create();
 
         this.isPlaying = false;
-        this.score.highScore = this.highScore
         this.score.score = this.highScore
+        const localHighscore = this.score.getHighScore()
+        this.score.highScore = localHighscore > this.highScore ? localHighscore : this.highScore
         this.score.update()
         console.log(this.score);
         new Promise((resolve, reject)=>{
-            this.score.upload(this.highScore.score, 'TEST')
-            resolve()
+            this.score.upload(this.highScore, 'TEST', resolve)
         }).then(()=>{
             this.score.getScores()
         })

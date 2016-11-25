@@ -10,10 +10,7 @@ export default class Game extends BaseState {
 
     init(score) {
         this.interval = 0;
-        if (score) {
-            this.highScore = score
-        }
-
+        this.highScore = score
     }
 
     update() {
@@ -22,9 +19,9 @@ export default class Game extends BaseState {
 
     create() {
         super.create();
-        this.score.highScore = this.highScore
-        console.log(this.highScore);
-
+        if (this.highScore) {
+            this.score.highScore = this.highScore
+        }
         this.isPlaying = true;
     }
 

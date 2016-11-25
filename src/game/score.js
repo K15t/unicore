@@ -5,7 +5,7 @@ import constants from '../constants';
 export default class Score {
     constructor(game) {
         this.score = 0
-        this.highScore = 0
+        this.highScore = this.getHighScore()
         this.game = game
 
         var scoreBar = game.add.graphics(0,0)
@@ -13,8 +13,9 @@ export default class Score {
         scoreBar.drawRect(0,0,game.width,game.height*.1)
         scoreBar.endFill()
 
-        this.scoreCounter = game.add.text(game.width*.5,game.height*.025, this.getScore(), {fill:'#fff', boundsAlignV:'center'})
-        this.highScoreCounter = game.add.text(game.width*.1,game.height*.025, this.getHighScore(), {fill:'#fff', boundsAlignV:'center'})
+        this.scoreCounter = game.add.text(game.width*.7,game.height*.025, '', {fill:'#fff', boundsAlignV:'center'})
+        this.highScoreCounter = game.add.text(game.width*.3,game.height*.025, '', {fill:'#fff', boundsAlignV:'center'})
+        this.update()
     }
 
     add(amount) {
@@ -22,16 +23,21 @@ export default class Score {
     }
 
     update() {
-        this.scoreCounter.text = this.getScore()
-        this.highScoreCounter.text = this.getHighScore()
+        this.scoreCounter.text = `SCORE - ${leftPad(this.getScore(), 7, 0)}`
+        this.highScoreCounter.text = `HIGHSCORE - ${leftPad(this.highScore, 7, 0)}`
     }
 
     getScore() {
-        return 'SCORE - ' + leftPad(this.score, 7, 0)
+        return this.score
     }
 
     getHighScore() {
-        return 'HIGHSCORE - ' + leftPad(this.highScore, 7, 0)
+        var highscore = 0
+        var localHighscore = localStorage.getItem('highscore')
+        if (localHighscore) {
+            highscore = localHighscore
+        }
+        return parseInt(highscore)
     }
 
     getScores() {
@@ -42,13 +48,16 @@ export default class Score {
                 score = scores[score]
                 text += `${score.user} - ${leftPad(score.score,7,0)}\n`
             }
-            this.game.add.text(this.game.width*.25,this.game.height*.3, text, {fill:'#fff', boundsAlignV:'center'})
+            this.game.add.text(this.game.width*.25,this.game.height*.2, text, {fill:'#fff', boundsAlignV:'center'})
         })
     }
 
-    upload(score, name) {
+    upload(score, name, resolve) {
+        if (localStorage.getItem('highscore') < score) {
+            localStorage.setItem('highscore', score)
+        }
         request.post({url:constants.REST_URL, body:`{"score":${score},"user":"${name}"}`, json:true}, (error, response, body)=>{
-            console.log(body);
+            resolve()
         })
     }
 }
