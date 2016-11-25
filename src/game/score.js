@@ -58,7 +58,7 @@ export default class Score {
                 }
             }
 
-            this.game.add.text(this.game.width*.2,this.game.height*.12, text, {fill:'#fff', boundsAlignV:'center'})
+            this.game.add.text(this.game.width*.5,this.game.height*.12, text, {fill:'#fff', boundsAlignV:'center'})
         })
     }
 

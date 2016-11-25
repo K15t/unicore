@@ -13,7 +13,6 @@ export default class Game extends BaseState {
         this.highScore = score
     }
 
-
     update() {
         super.update(this.gameover);
     }
@@ -33,7 +32,7 @@ export default class Game extends BaseState {
     }
 
     gameover() {
-        this.state.start('highscore', true, false, this.score.score);
+        this.state.start('highscore', true, false, this.score.score)
     }
 
     shutdown() {
