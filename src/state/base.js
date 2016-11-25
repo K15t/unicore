@@ -24,11 +24,12 @@ export default class Base extends Phaser.State {
         this.score = new Score(this.game)
 
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        this.game.time.advancedTiming = true;
     }
 
     update(gameoverCallback) {
         this.interval += 1
-        this.player.update(this.isPlaying);
+        this.player.update(this.isPlaying, this.world.velocity);
         this.world.update(this.isPlaying);
 
         if (this.isPlaying) {

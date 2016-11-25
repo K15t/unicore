@@ -20,10 +20,6 @@ export default class World {
         game.world.bounds.y = game.height  * 0.1;
 
         game.physics.arcade.setBoundsToWorld();
-        /*
-        game.physics.arcade.bounds.height = game.height * 0.9;
-        game.physics.arcade.bounds.y = 60;
-        */
 
         game.physics.arcade.skipQuadTree = true;
 

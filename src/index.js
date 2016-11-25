@@ -8,7 +8,6 @@ const gameStates = require('./state').default;
 
 const game = new Phaser.Game(800, 600, Phaser.CANVAS, 'unicore', { preload: preload, create: create, update: update, render: render });
 
-
 window.WebFontConfig = {
     active: function() { },
 
@@ -40,8 +39,6 @@ function create() {
         game.state.add(stateName, gameStates[stateName]);
     }
     game.state.start('menu');
-
-    // TODO create world objects (player, obstacles, etc..)
 }
 
 

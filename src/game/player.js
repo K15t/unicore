@@ -11,6 +11,9 @@ export default class Player {
 
         this.coins = 0;
 
+        this.generateInitialTrail();
+        this.lastYPos = [];
+
         this.rocketcorn = game.add.sprite(game.width/4, game.height/2, 'rocketcorn');
         this.rocketcorn.anchor = {x:.5,y:.5};
         this.rocketcorn.angle = 40;
@@ -28,36 +31,59 @@ export default class Player {
         this.rocketcorn.invulnerability = 0;
         this.rocketcorn.body.collideWorldBounds = true;
         this.rocketcorn.body.setSize(constants.ROCKETCORN_SIZE, constants.ROCKETCORN_SIZE, constants.ROCKETCORN_SIZE  * 0.65, constants.ROCKETCORN_SIZE * 0.75);
+
+
     }
 
-    generateTrail() {
+    addTrail(){
         let colors = [0xf28582,0xe2e04d,0x74af28,0x50b9ff,0xa797db]
+
         let trail = this.game.add.group()
         let trailPart = {}
-        const trailHeight = (this.rocketcorn.height / 5) / colors.length
+        const trailHeight = (constants.ROCKETCORN_SIZE / 5) / colors.length
         for (var index in colors) {
-            trailPart = this.game.add.graphics(0,0)
+            trailPart = this.game.add.graphics(0, 0)
             trailPart.beginFill(colors[index])
-            trailPart.drawRect(0,index*trailHeight,trailHeight,trailHeight)
+            trailPart.drawRect(0, index * trailHeight, trailHeight, trailHeight)
             trailPart.endFill()
             trail.add(trailPart)
         }
-        trail.x = this.rocketcorn.x + this.rocketcorn.width/2
-        trail.y = this.rocketcorn.y
+
+
+        trail.x = 0;
+        trail.y = 0;
         this.trail.unshift(trail)
-        if (this.trail.length > 70) {
-            this.trail.pop()
+    }
+
+    generateInitialTrail() {
+        for(let i = 0; i < 70; ++i){
+            this.addTrail();
         }
+    }
+
+    updateTrail() {
+        this.lastYPos.unshift(this.rocketcorn.y);
+
+        if(this.lastYPos.length > 70){
+            this.lastYPos.pop();
+        }
+
+
+        let colors = [0xf28582,0xe2e04d,0x74af28,0x50b9ff,0xa797db]
+        const trailHeight = (constants.ROCKETCORN_SIZE / 5) / colors.length
+
+
         for (var index in this.trail) {
             var rainbow = this.trail[index]
             rainbow.x = this.rocketcorn.x-(trailHeight*index)
+            rainbow.y = this.lastYPos[index];
         }
     }
 
     update(isPlaying) {
         const game = this.game;
 
-        this.generateTrail()
+        this.updateTrail()
 
         if(this.rocketcorn.body){
             //this.rocketcorn.body.maxGravity.y = constants.GRAVITY;
