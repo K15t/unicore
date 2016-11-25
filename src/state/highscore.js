@@ -20,11 +20,10 @@ export default class Highscore extends BaseState {
             const localHighscore = this.score.getHighScore()
             this.score.highScore = localHighscore > this.highScore ? localHighscore : this.highScore
             this.score.update()
-            console.log(this.score);
             new Promise((resolve, reject)=>{
                 this.score.upload(this.highScore, 'TEST', resolve)
             }).then(()=>{
-                this.score.getScores()
+                this.score.getScores(true)
             })
         } else {
             this.score.getScores()
