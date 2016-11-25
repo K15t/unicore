@@ -73,10 +73,10 @@ export default class Base extends Phaser.State {
                 if (player.alive) {
                     player.invulnerability = 60 * constants.INVULNERABILITY_TIME;
                 } else {
-                    gameoverCallback();
+                    gameoverCallback.call(this);
                 }
             } else {
-                gameoverCallback();
+                gameoverCallback.call(this);
             }
         }
     }
@@ -97,7 +97,7 @@ export default class Base extends Phaser.State {
     }
 
     gameover() {
-        
+
     }
 
     shutdown() {
