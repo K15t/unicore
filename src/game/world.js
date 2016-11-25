@@ -77,7 +77,7 @@ export default class World {
         const spawnPickup = !(Math.floor(Math.random() * 60 * constants.SPAWN_PICKUPS_EVERY_SEC * spawnSpeedModifier));
 
         if(spawnPickup){
-            const isCoin = !!Math.floor(Math.random() * 2);
+            const isCoin = !!Math.floor(Math.random() * 10);
 
             let pickupType = 'coin';
             if(!isCoin){

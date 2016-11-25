@@ -37,7 +37,7 @@ export default class Base extends Phaser.State {
         this.world.update(this.isPlaying);
 
         if (this.isPlaying) {
-            if (this.interval % 60 == 0) {
+            if (this.player.getSprite().health > 0 && this.interval % 60 == 0) {
                 this.world.accellerate();
                 this.score.update()
                 this.score.add(this.world.velocity * 10)
@@ -61,18 +61,31 @@ export default class Base extends Phaser.State {
         game.physics.arcade.overlap(playerSprite, pickups, this.collidePickup.bind(this, this.player));
     }
 
+    playerDeath(gameoverCallback, player){
+        const timer = this.game.time.create(false);
+        timer.add(2000, () =>{
+            gameoverCallback.call(this);
+        });
+        timer.start();
+
+        player.body.angularVelocity = 360;
+        player.body.collideWorldBounds = false;
+    }
+
     collideObstacle(gameoverCallback, player) {
         if(player.invulnerability <= 0) {
-            if (player.health > 0) {
+            if (player.health > 1) {
                 player.damage(1);
-                if (player.alive) {
+                if (player.health > 1) {
                     player.invulnerability = 60 * constants.INVULNERABILITY_TIME;
                     player.invulnerabilityType = 'hurt';
                 } else {
-                    gameoverCallback.call(this);
+                    this.world.velocity = 0;
+
+                    this.playerDeath(gameoverCallback, player);
                 }
             } else {
-                gameoverCallback.call(this);
+                this.playerDeath(gameoverCallback, player);
             }
         }
     }

@@ -32,8 +32,6 @@ export default class Player {
         this.rocketcorn.invulnerability = 0;
         this.rocketcorn.body.collideWorldBounds = true;
         this.rocketcorn.body.setSize(constants.ROCKETCORN_SIZE, constants.ROCKETCORN_SIZE, constants.ROCKETCORN_SIZE  * 0.65, constants.ROCKETCORN_SIZE * 0.75);
-
-
     }
 
     addTrail(){
@@ -103,7 +101,7 @@ export default class Player {
                 this.moving = true
             }
 
-            const boost =  verticalMovement * constants.VERTICAL_VELOCITY;
+            const boost =  (this.getSprite().health > 0)?(verticalMovement * constants.VERTICAL_VELOCITY):0;
 
             this.rocketcorn.body.gravity.y -= boost;
 

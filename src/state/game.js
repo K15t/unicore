@@ -29,7 +29,7 @@ export default class Game extends BaseState {
 
     render(){
         super.render();
-        this.lifeCounter.text = 'Lives: ' + (~~this.player.getSprite().health);
+        this.lifeCounter.text = 'Lives: ' + (~~(this.player.getSprite().health-1));
     }
 
     gameover() {
