@@ -34095,6 +34095,9 @@
 	            _constants2.default.POWERUPS.forEach(function (pu) {
 	                _this2.game.load.image(pu, 'assets/images/' + pu + '.png');
 	            });
+	            _constants2.default.OBSTACLES.forEach(function (pu) {
+	                _this2.game.load.image(pu, 'assets/images/' + pu + '.png');
+	            });
 	        }
 	    }, {
 	        key: 'create',
@@ -34294,11 +34297,18 @@
 	            var spawnObstacle = this.timeSinceLastObstacle > _constants2.default.SPAWN_OBSTACLES_EVERY_SEC;
 	
 	            if (spawnObstacle) {
+	                var powerupSpriteIndex = Math.floor(Math.random() * _constants2.default.OBSTACLES.length);
+	                var obstacleType = _constants2.default.OBSTACLES[powerupSpriteIndex];
+	
 	                var yPos = this.obstacleSpawner;
-	                var newObstacle = this.game.add.sprite(this.x + 800, yPos, 'obstacle');
+	                var newObstacle = this.game.add.sprite(this.x + 800, yPos, obstacleType);
 	                this.game.physics.arcade.enable(newObstacle);
 	
 	                newObstacle.body.allowGravity = false;
+	
+	                newObstacle.height = 100;
+	                newObstacle.width = 100;
+	
 	                this.obstacles.push(newObstacle);
 	
 	                this.timeSinceLastObstacle = 0;
@@ -34319,8 +34329,8 @@
 	
 	                var pickupType = 'coin';
 	                if (!isCoin) {
-	                    var powerupSpriteIndex = Math.floor(Math.random() * _constants2.default.POWERUPS.length);
-	                    pickupType = _constants2.default.POWERUPS[powerupSpriteIndex];
+	                    var _powerupSpriteIndex = Math.floor(Math.random() * _constants2.default.POWERUPS.length);
+	                    pickupType = _constants2.default.POWERUPS[_powerupSpriteIndex];
 	                }
 	
 	                var _yPos = 60 + Math.random() * 600;
@@ -34418,6 +34428,7 @@
 	    POWERUP_INVULNERABILITY_DURATION: 6,
 	
 	    POWERUPS: ['OFCE', 'VSN', 'ALX', 'BAC', 'TRSL'],
+	    OBSTACLES: ['feindbild1', 'feindbild2', 'feindbild3'],
 	
 	    REST_URL: 'https://unicore-score.herokuapp.com/scores'
 	};
