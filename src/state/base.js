@@ -42,6 +42,15 @@ export default class Base extends Phaser.State {
         }
     }
 
+    render(){
+        this.game.debug.body(this.player.getSprite(), '#FFFFFF',false);
+        const pickups = this.world.getPickups();
+        pickups.forEach((p) => {
+            this.game.debug.body(p, '#00FF00',false);
+        });
+
+    }
+
     checkCollisions() {
         const game = this.game;
         const playerSprite = this.player.getSprite();
@@ -81,6 +90,7 @@ export default class Base extends Phaser.State {
             player.lives += 1;
         }
 
+        pickup.body.destroy();
         pickup.kill();
     }
 

@@ -1,7 +1,8 @@
 export default {
     START_VELOCITY: 1,
     ACCELERATION: 0.01,
-    VERTICAL_VELOCITY: 3,
+    VERTICAL_VELOCITY: 8 * 60,
+    GRAVITY: 3 * 60,
 
     ROCKETCORN_SIZE: 100,
     START_LIVES: 1,

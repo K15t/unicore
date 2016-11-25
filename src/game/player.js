@@ -24,6 +24,10 @@ export default class Player {
         this.rocketcorn.health = 10;
 
         game.physics.arcade.enable(this.rocketcorn);
+
+        this.rocketcorn.invulnerability = 0;
+        this.rocketcorn.body.collideWorldBounds = true;
+        this.rocketcorn.body.setSize(constants.ROCKETCORN_SIZE, constants.ROCKETCORN_SIZE, constants.ROCKETCORN_SIZE  * 0.65, constants.ROCKETCORN_SIZE * 0.75);
     }
 
     generateTrail() {
@@ -53,29 +57,27 @@ export default class Player {
     update(isPlaying) {
         const game = this.game;
 
-        const keyboard = this.getKeyboardControls();
-        const mouse = 0; //this.getMouseControls();
-
         this.generateTrail()
 
-        let verticalMovement = (keyboard.down - keyboard.up);
-        if (!verticalMovement) {
-            if (!this.moving) {
-                verticalMovement = this.velocity / 2
-            }
-            this.moving = false
-        } else {
-            this.moving = true
+        if(this.rocketcorn.body){
+            //this.rocketcorn.body.maxGravity.y = constants.GRAVITY;
+            this.rocketcorn.body.gravity.y = isPlaying?constants.GRAVITY:0;
         }
+
         if(isPlaying) {
-            this.velocity = verticalMovement * constants.VERTICAL_VELOCITY;
-            const newYPosition = this.rocketcorn.y + this.velocity;
+            let verticalMovement = this.getKeyboardControls();
+            if (!verticalMovement) {
+                if (!this.moving) {
+                    //verticalMovement = this.rocketcorn.body.velocity.y / 2
+                }
+                this.moving = false
+            } else {
+                this.moving = true
+            }
 
-            const minPosition = game.height * .1 + constants.ROCKETCORN_SIZE / 2; // score bar is 60px high
-            const maxPosition = game.height - constants.ROCKETCORN_SIZE / 2;
+            const boost =  verticalMovement * constants.VERTICAL_VELOCITY;
 
-            // lock to bounds
-            this.rocketcorn.y = Math.max(Math.min(newYPosition, maxPosition), minPosition);
+            this.rocketcorn.body.gravity.y -= boost;
 
             if (this.rocketcorn.invulnerability > 0) {
                 const blinkAlpha = (this.rocketcorn.invulnerability) % 30;
@@ -87,10 +89,9 @@ export default class Player {
 
     getKeyboardControls() {
         const game = this.game;
-        return {
-            up: (game.input.keyboard.isDown(Phaser.Keyboard.UP)||game.input.keyboard.isDown(Phaser.Keyboard.W))?1:0,
-            down: (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)||game.input.keyboard.isDown(Phaser.Keyboard.S))?1:0
-        };
+        const keypress = game.input.keyboard.isDown(Phaser.Keyboard.UP)||game.input.keyboard.isDown(Phaser.Keyboard.W)||game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR);
+
+        return keypress?1:0;
     }
     // TODO
     getMouseControls() {

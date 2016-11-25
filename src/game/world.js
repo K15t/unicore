@@ -15,6 +15,19 @@ export default class World {
 
         this.obstacles = [];
         this.pickups = [];
+
+        game.world.bounds.height = game.height  * 0.9;
+        game.world.bounds.y = game.height  * 0.1;
+
+        game.physics.arcade.setBoundsToWorld();
+        /*
+        game.physics.arcade.bounds.height = game.height * 0.9;
+        game.physics.arcade.bounds.y = 60;
+        */
+
+        game.physics.arcade.skipQuadTree = true;
+
+
     }
 
     update(isPlaying) {
@@ -39,8 +52,10 @@ export default class World {
 
         if(spawnObstacle){
             const yPos = 60 + Math.random() * 600;
-            const newObstacle = this.game.add.sprite( this.x + 700, yPos, 'obstacle' );
+            const newObstacle = this.game.add.sprite( this.x + 800, yPos, 'obstacle' );
             this.game.physics.arcade.enable(newObstacle);
+
+            newObstacle.body.allowGravity = false;
             this.obstacles.push(newObstacle);
         }
 
@@ -51,6 +66,7 @@ export default class World {
             const yPos = 60 + Math.random() * 600;
             const newPickup = this.game.add.sprite( this.x + 700, yPos, 'pickup' );
             this.game.physics.arcade.enable(newPickup);
+            newPickup.body.allowGravity = false;
             this.pickups.push(newPickup);
         }
     }
@@ -64,9 +80,15 @@ export default class World {
     }
 
     despawnOldWorldObjects() {
-        const filterFunction = (obj) => ( obj.x > -1 );
-        this.obstacles.filter(filterFunction);
-        this.pickups.filter(filterFunction);
+        const aliveFilter = (obj) => ( obj.x > -100 );
+        const deadFilter = (obj) => ( obj.x <= -100 );
+        const killFunction = (obj) => { obj.destroy(); obj.kill() };
+
+        this.obstacles.filter(deadFilter).forEach(killFunction);
+        this.pickups.filter(deadFilter).forEach(killFunction);
+
+        this.obstacles = this.obstacles.filter(aliveFilter);
+        this.obstacles = this.pickups.filter(aliveFilter);
     }
 
     getPickups(){
