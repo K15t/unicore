@@ -1,6 +1,9 @@
 # Unicore
-Project for our companys Hackathon project. By @Moerphy and @martinmuzatko.
+Project for our [companys](http://k15t.com) Hackathon project. By [@Moerphy](https://github.com/Moerphy) and [@martinmuzatko](https://github.com/martinmuzatko).
 This is my first real webgl/js game project using [phaser.io](https://phaser.io/).
+
+[![The game](http://i.imgur.com/mf2BcQr.png)](https://martinmuzatko.github.io/unicore/)
+In a world ravaged by bad content management, our only solace is Confluence together with the Scroll addons.
 
 ## How to run
 
