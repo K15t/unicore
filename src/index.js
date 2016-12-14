@@ -2,9 +2,7 @@ window.PIXI = require('phaser/build/custom/pixi')
 window.p2 = require('phaser/build/custom/p2')
 window.Phaser = require('phaser/build/custom/phaser-split')
 
-
 const gameStates = require('./state').default;
-
 
 const game = new Phaser.Game(800, 600, Phaser.CANVAS, 'unicore', { preload: preload, create: create, update: update, render: render });
 
@@ -17,7 +15,6 @@ window.WebFontConfig = {
 
 };
 
-
 function preload() {
     //game.stage.backgroundColor = '#007236';
     game.load.image('startButton', 'assets/images/startButton.png');
@@ -25,11 +22,6 @@ function preload() {
 
     game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 }
-
-
-
-
-
 
 function create() {
     // create objects
@@ -40,9 +32,6 @@ function create() {
     }
     game.state.start('menu');
 }
-
-
-
 
 function update() {
 

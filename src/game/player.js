@@ -68,10 +68,8 @@ export default class Player {
             this.lastYPos.pop();
         }
 
-
         let colors = [0xf28582,0xe2e04d,0x74af28,0x50b9ff,0xa797db]
         const trailHeight = (constants.ROCKETCORN_SIZE / 5) / colors.length
-
 
         for (var index in this.trail) {
             var rainbow = this.trail[index]
@@ -137,7 +135,11 @@ export default class Player {
 
     getKeyboardControls() {
         const game = this.game;
-        const keypress = game.input.keyboard.isDown(Phaser.Keyboard.UP)||game.input.keyboard.isDown(Phaser.Keyboard.W)||game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR);
+        const keypress =
+            game.input.keyboard.isDown(Phaser.Keyboard.UP)
+            || game.input.keyboard.isDown(Phaser.Keyboard.W)
+            || game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)
+            || game.input.activePointer.isDown;
 
         return keypress?1:0;
     }
