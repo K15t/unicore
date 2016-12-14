@@ -35250,7 +35250,7 @@
 	        key: 'getKeyboardControls',
 	        value: function getKeyboardControls() {
 	            var game = this.game;
-	            var keypress = game.input.keyboard.isDown(Phaser.Keyboard.UP) || game.input.keyboard.isDown(Phaser.Keyboard.W) || game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR);
+	            var keypress = game.input.keyboard.isDown(Phaser.Keyboard.UP) || game.input.keyboard.isDown(Phaser.Keyboard.W) || game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || game.input.activePointer.isDown;
 	
 	            return keypress ? 1 : 0;
 	        }
