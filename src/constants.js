@@ -1,5 +1,5 @@
 export default {
-    START_VELOCITY: 1,
+    START_VELOCITY: 2.5,
     ACCELERATION: 0.01,
     VERTICAL_VELOCITY: 10 * 60,
     GRAVITY: 4 * 60,
@@ -9,7 +9,7 @@ export default {
 
 
     ROCKETCORN_SIZE: 100,
-    START_LIVES: 2,
+    START_LIVES: 1,
     COINS_FOR_NEW_LIFE: 10,
     INVULNERABILITY_TIME: 2,
 

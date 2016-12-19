@@ -5,7 +5,6 @@ export default class Highscore extends BaseState {
 
     init(score) {
         this.highScore = score
-        console.log(score);
     }
 
     preload() {
@@ -28,7 +27,6 @@ export default class Highscore extends BaseState {
         this.startButton = game.add.button(game.world.centerX - 100, game.height*.8, 'startButton', ()=>{this.returnToStart()});
         this.startButtonText = game.add.text(game.world.centerX - 20, game.height*.825, 'Lift off!',buttonTextStyle);
 
-        console.log(this);
 
         this.submitted = false
         this.started = false
@@ -86,7 +84,6 @@ export default class Highscore extends BaseState {
     }
 
     returnToStart() {
-        console.log(this.score);
         if (this.score.uploaded || !this.score.score) {
             this.started = true
             this.state.start('game', true, false, this.highScore)

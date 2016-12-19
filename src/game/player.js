@@ -25,7 +25,7 @@ export default class Player {
 
         this.rocketcorn.scale.x *= -1
 
-        this.rocketcorn.health = constants.START_LIVES;
+        this.rocketcorn.health = constants.START_LIVES + 1; // 1 = dead
 
         game.physics.arcade.enable(this.rocketcorn);
 

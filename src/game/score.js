@@ -54,7 +54,6 @@ export default class Score {
             if (includeOwnScore && this.id !== false) {
                 var id = scores.findIndex((el,index)=>index+1==this.id)
                 if (id > 10) {
-                    console.log(scores[id]);
                     text += `${leftPad(parseInt(id)+1,3,' ')}. ${this.trimName(scores[id].name)} - ${leftPad(this.score,7,0)}\n`
                 }
             }

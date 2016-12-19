@@ -139,5 +139,6 @@ export default class World {
     accellerate() {
         this.velocity += .1
         this.x += this.velocity
+        console.log(this.velocity);
     }
 }
