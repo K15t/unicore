@@ -15,7 +15,11 @@ export default class Highscore extends BaseState {
     create() {
         super.create();
         const game = this.game;
-
+        this.notice = game.add.text(game.world.centerX - 20, game.height*.95, '',{fill:"#ffffff",font: '20px Bungee', boundsAlignV: 'middle', boundsAlignH: 'center'});
+        console.log(this);
+        if (this.score.score) {
+            this.notice.text = 'Enter your name'
+        }
 
         this.isPlaying = false;
         if (this.highScore) {
@@ -65,8 +69,17 @@ export default class Highscore extends BaseState {
             font: '30px Bungee',
         };
 
-        const startButton = game.add.button(game.world.centerX - 100, game.height*.8, 'startButton', ()=>{this.state.start('game', true, false, this.highScore)});
+        const startButton = game.add.button(game.world.centerX - 100, game.height*.8, 'startButton', ()=>{this.returnToStart()});
         const startButtonText = game.add.text(game.world.centerX - 20, game.height*.825, 'Lift off',buttonTextStyle);
+    }
+
+    returnToStart() {
+        console.log(this.score);
+        if (this.score.uploaded || !this.score.score) {
+            this.state.start('game', true, false, this.highScore)
+        } else {
+            this.notice.text = 'press [ENTER] to submit your score';
+        }
     }
 
     update() {

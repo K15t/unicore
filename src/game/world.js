@@ -1,32 +1,32 @@
 import constants from '../constants';
 
 export default class World {
-    constructor(game) {
-        this.game = game;
+    constructor(state) {
+        this.game = state.game
 
         this.x = 0;
-        this.width = game.width;
-        this.height = game.height;
-        this.velocity = constants.START_VELOCITY;
+        this.width = this.game.width
+        this.height = this.game.height
+        this.velocity = constants.START_VELOCITY
 
-        this.background = game.add.group();
+        this.background = this.game.add.group();
         this.background.create(0, 0, 'sky');
-        this.background.create(this.width, 0, 'sky')
+        this.background.create(this.background.width, 0, 'sky')
 
         this.obstacles = [];
         this.pickups = [];
 
         this.timeSinceLastObstacle = 0;
-        this.obstacleSpawner = game.height / 2;
+        this.obstacleSpawner = this.game.height / 2;
         this.obstacleSpawnerDirection = 1;
         this.obstacleSpawnerSpeed = 1;
 
-        game.world.bounds.height = game.height  * 0.9;
-        game.world.bounds.y = game.height  * 0.1;
+        this.game.world.bounds.height = this.game.height  * 0.9;
+        this.game.world.bounds.y = this.game.height  * 0.1;
 
-        game.physics.arcade.setBoundsToWorld();
+        this.game.physics.arcade.setBoundsToWorld();
 
-        game.physics.arcade.skipQuadTree = true;
+        this.game.physics.arcade.skipQuadTree = true;
 
 
     }

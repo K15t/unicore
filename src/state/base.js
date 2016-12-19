@@ -26,7 +26,7 @@ export default class Base extends Phaser.State {
     }
 
     create() {
-        this.world = new World(this.game)
+        this.world = new World(this)
         this.player = new Player(this.game);
         this.score = new Score(this.game)
 
@@ -40,7 +40,7 @@ export default class Base extends Phaser.State {
         this.world.update(this.isPlaying);
 
         if (this.isPlaying) {
-            if (this.player.getSprite().health > 0 && this.interval % 60 == 0) {
+            if (this.player.getSprite().health > 0 && this.interval % constants.FRAMERATE == 0) {
                 this.world.accellerate();
                 this.score.update()
                 this.score.add(this.world.velocity * 10)

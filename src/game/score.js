@@ -8,6 +8,7 @@ export default class Score {
         this.highScore = this.getHighScore()
         this.game = game
         this.id = false
+        this.uploaded = false
 
         var scoreBar = game.add.graphics(0,0)
         scoreBar.beginFill(0x000000)
@@ -42,19 +43,19 @@ export default class Score {
     }
 
     getScores(includeOwnScore = false) {
-        request.get(`${constants.REST_URL}?_sort=score&_order=DESC`, (error, response, body)=>{
+        request.get(`${constants.REST_URL}`, (error, response, body)=>{
             var scores = JSON.parse(body)
             var text = ''
             var firstScores = scores.slice(0,10)
             for (var index in firstScores) {
                 var score = firstScores[index]
-                text += `${leftPad(parseInt(index)+1,3,' ')}. ${this.trimName(score.user)} - ${leftPad(score.score,7,0)}\n`
+                text += `${leftPad(parseInt(index)+1,3,' ')}. ${this.trimName(score.name)} - ${leftPad(score.score,7,0)}\n`
             }
             if (includeOwnScore && this.id !== false) {
-                var id = scores.findIndex(el=>el.id==this.id)
+                var id = scores.findIndex((el,index)=>index+1==this.id)
                 if (id > 10) {
                     console.log(scores[id]);
-                    text += `${leftPad(parseInt(id)+1,3,' ')}. ${this.trimName(scores[id].user)} - ${leftPad(this.score,7,0)}\n`
+                    text += `${leftPad(parseInt(id)+1,3,' ')}. ${this.trimName(scores[id].name)} - ${leftPad(this.score,7,0)}\n`
                 }
             }
 
@@ -63,7 +64,7 @@ export default class Score {
     }
 
     trimName(name) {
-        return leftPad(name.substr(0,constants.MAX_NAME_LENGTH), 8, ' ')
+        return leftPad(name.substr(0,constants.MAX_NAME_LENGTH), 8, ' ').toUpperCase()
     }
 
     upload(score, name, resolve) {
@@ -73,10 +74,12 @@ export default class Score {
         request.post(
             {
                 url:constants.REST_URL,
-                body:`{"score":${score},"user":"${name.substr(0,constants.MAX_NAME_LENGTH)}"}`,
+                body:`{"score":${score},"score_name":"${name.substr(0,constants.MAX_NAME_LENGTH).toUpperCase()}"}`,
+                method: 'POST',
                 json:true
             }, (error, response, body) => {
                 this.id = body.id
+                this.uploaded = true
                 resolve()
             }
         )

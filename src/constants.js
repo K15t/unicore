@@ -3,6 +3,10 @@ export default {
     ACCELERATION: 0.01,
     VERTICAL_VELOCITY: 10 * 60,
     GRAVITY: 4 * 60,
+    FRAMERATE: 60,
+    CANVASWIDTH: '100',
+    CANVASHEIGHT: '100',
+
 
     ROCKETCORN_SIZE: 100,
     START_LIVES: 2,
@@ -20,5 +24,5 @@ export default {
     POWERUPS: [ 'OFCE', 'VSN', 'ALX', 'BAC', 'TRSL' ],
     OBSTACLES: [ 'feindbild1', 'feindbild2', 'feindbild3' ],
 
-    REST_URL: 'https://unicore-score.herokuapp.com/scores'
+    REST_URL: 'http://happy-css.com/unicore-scores/'
 };
