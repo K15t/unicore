@@ -65,6 +65,7 @@ export default class Base extends Phaser.State {
     }
 
     playerDeath(gameoverCallback, player){
+        this.isPlaying = false
         const timer = this.game.time.create(false);
         timer.add(2000, () =>{
             gameoverCallback.call(this);
