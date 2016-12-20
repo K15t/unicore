@@ -5,11 +5,20 @@ window.Phaser = require('phaser/build/custom/phaser-split')
 import './style/main.less'
 
 const gameStates = require('./state').default;
+const constants = require('./constants');
 
-const game = new Phaser.Game(800, 600, Phaser.CANVAS, 'unicore', { preload: preload, create: create, update: update, render: render });
+const game = new Phaser.Game(
+    constants.CANVASWIDTH,  // width
+    constants.CANVASHEIGHT,  // height
+    Phaser.CANVAS,  // renderer
+    '',  // parent
+    { preload: preload, create: create, update: update, render: render } // state
+);
+
+window.game = game
 
 window.WebFontConfig = {
-    active: function() { },
+    active: function() {},
 
     google: {
         families: ['Bungee']
