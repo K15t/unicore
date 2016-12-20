@@ -24,5 +24,5 @@ export default {
     POWERUPS: [ 'OFCE', 'VSN', 'ALX', 'BAC', 'TRSL' ],
     OBSTACLES: [ 'feindbild1', 'feindbild2', 'feindbild3' ],
 
-    REST_URL: 'http://happy-css.com/unicore-scores/'
+    REST_URL: 'https://happy-css.com/unicore-scores/'
 };
