@@ -79,7 +79,7 @@ export default class Score {
             }, (error, response, body) => {
                 this.id = body.id
                 this.uploaded = true
-                resolve()
+                resolve(body.id)
             }
         )
     }

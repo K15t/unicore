@@ -4,7 +4,8 @@ import constants from '../constants'
 export default class Highscore extends BaseState {
 
     init(score) {
-        this.highScore = score
+        this.highScore = score.highscore
+        this.id = score.id
     }
 
     preload() {
@@ -39,6 +40,7 @@ export default class Highscore extends BaseState {
             this.score.update()
         }
 
+        this.score.id = this.id
         this.score.getScores(true)
 
     }

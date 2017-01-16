@@ -159,8 +159,8 @@ export default class HighscoreEnter extends BaseState {
         localStorage.setItem('name',this.characters.join(''))
         new Promise((resolve, reject)=>{
             this.score.upload(this.highScore, this.characters.join(''), resolve)
-        }).then(()=>{
-            this.state.start('highscore', true, false, this.highScore)
+        }).then((id)=>{
+            this.state.start('highscore', true, false, {highscore: this.highScore, id: id})
         })
     }
 

@@ -34935,7 +34935,7 @@
 	            }, function (error, response, body) {
 	                _this2.id = body.id;
 	                _this2.uploaded = true;
-	                resolve();
+	                resolve(body.id);
 	            });
 	        }
 	    }]);
@@ -35790,7 +35790,8 @@
 	    _createClass(Highscore, [{
 	        key: 'init',
 	        value: function init(score) {
-	            this.highScore = score;
+	            this.highScore = score.highscore;
+	            this.id = score.id;
 	        }
 	    }, {
 	        key: 'preload',
@@ -35829,6 +35830,7 @@
 	                this.score.update();
 	            }
 	
+	            this.score.id = this.id;
 	            this.score.getScores(true);
 	        }
 	    }, {
@@ -36066,8 +36068,8 @@
 	            localStorage.setItem('name', this.characters.join(''));
 	            new Promise(function (resolve, reject) {
 	                _this4.score.upload(_this4.highScore, _this4.characters.join(''), resolve);
-	            }).then(function () {
-	                _this4.state.start('highscore', true, false, _this4.highScore);
+	            }).then(function (id) {
+	                _this4.state.start('highscore', true, false, { highscore: _this4.highScore, id: id });
 	            });
 	        }
 	    }, {
