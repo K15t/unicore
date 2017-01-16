@@ -104,7 +104,7 @@ export default class HighscoreEnter extends BaseState {
             boundsAlignH: 'center'
         };
         var localScoreName = localStorage.getItem('name')
-        if (localScoreName) {
+        if (localScoreName && localScoreName.length == constants.MAX_NAME_LENGTH) {
             this.characters = localScoreName.split('')
         } else {
             this.characters = ('A,').repeat(constants.MAX_NAME_LENGTH).split(',').splice(0,constants.MAX_NAME_LENGTH)

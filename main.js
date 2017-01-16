@@ -36001,7 +36001,7 @@
 	                boundsAlignH: 'center'
 	            };
 	            var localScoreName = localStorage.getItem('name');
-	            if (localScoreName) {
+	            if (localScoreName && localScoreName.length == _constants2.default.MAX_NAME_LENGTH) {
 	                this.characters = localScoreName.split('');
 	            } else {
 	                this.characters = 'A,'.repeat(_constants2.default.MAX_NAME_LENGTH).split(',').splice(0, _constants2.default.MAX_NAME_LENGTH);
