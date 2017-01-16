@@ -169,12 +169,7 @@ export default class HighscoreEnter extends BaseState {
     }
 
     returnToStart() {
-        if (this.score.uploaded || !this.score.score) {
-            this.started = true
-            this.state.start('game', true, false, this.highScore)
-        } else {
-            this.notice.text = 'press [ENTER] to submit your score';
-        }
+        this.state.start('game', true, false, this.highScore)
     }
 
     submit() {
