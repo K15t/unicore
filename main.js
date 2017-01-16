@@ -34894,8 +34894,8 @@
 	
 	            var includeOwnScore = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 	
-	            if (this.game.state.current == 'highscore') {
-	                _browserRequest2.default.get('' + _constants2.default.REST_URL, function (error, response, body) {
+	            _browserRequest2.default.get('' + _constants2.default.REST_URL, function (error, response, body) {
+	                if (_this.game.state.current == 'highscore') {
 	                    var scores = JSON.parse(body);
 	                    var text = '';
 	                    var firstScores = scores.slice(0, 10);
@@ -34913,8 +34913,8 @@
 	                    }
 	
 	                    _this.game.add.text(_this.game.width * .5, _this.game.height * .12, text, { fill: '#fff', boundsAlignV: 'center' });
-	                });
-	            }
+	                }
+	            });
 	        }
 	    }, {
 	        key: 'trimName',

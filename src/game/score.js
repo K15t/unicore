@@ -43,8 +43,8 @@ export default class Score {
     }
 
     getScores(includeOwnScore = false) {
-        if (this.game.state.current == 'highscore') {
-            request.get(`${constants.REST_URL}`, (error, response, body)=>{
+        request.get(`${constants.REST_URL}`, (error, response, body)=>{
+            if (this.game.state.current == 'highscore') {
                 var scores = JSON.parse(body)
                 var text = ''
                 var firstScores = scores.slice(0,10)
@@ -60,8 +60,8 @@ export default class Score {
                 }
 
                 this.game.add.text(this.game.width*.5,this.game.height*.12, text, {fill:'#fff', boundsAlignV:'center'})
-            })
-        }
+            }
+        })
     }
 
     trimName(name) {
