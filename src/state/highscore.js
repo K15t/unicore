@@ -4,8 +4,7 @@ import constants from '../constants'
 export default class Highscore extends BaseState {
 
     init(score) {
-        this.highScore = score.highscore
-        this.id = score.id
+        this.highScore = score
     }
 
     preload() {
@@ -34,13 +33,13 @@ export default class Highscore extends BaseState {
         })
 
         if (this.highScore) {
-            this.score.score = this.highScore
+            this.score.score = this.highScore.highscore
             const localHighscore = this.score.getHighScore()
-            this.score.highScore = localHighscore > this.highScore ? localHighscore : this.highScore
+            this.score.highScore = localHighscore > this.highScore.highscore ? localHighscore : this.highScore.highscore
             this.score.update()
         }
 
-        this.score.id = this.id
+        this.score.id = this.highScore.id
         this.score.getScores(true)
 
     }

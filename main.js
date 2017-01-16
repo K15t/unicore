@@ -35790,8 +35790,7 @@
 	    _createClass(Highscore, [{
 	        key: 'init',
 	        value: function init(score) {
-	            this.highScore = score.highscore;
-	            this.id = score.id;
+	            this.highScore = score;
 	        }
 	    }, {
 	        key: 'preload',
@@ -35824,13 +35823,13 @@
 	            });
 	
 	            if (this.highScore) {
-	                this.score.score = this.highScore;
+	                this.score.score = this.highScore.highscore;
 	                var localHighscore = this.score.getHighScore();
-	                this.score.highScore = localHighscore > this.highScore ? localHighscore : this.highScore;
+	                this.score.highScore = localHighscore > this.highScore.highscore ? localHighscore : this.highScore.highscore;
 	                this.score.update();
 	            }
 	
-	            this.score.id = this.id;
+	            this.score.id = this.highScore.id;
 	            this.score.getScores(true);
 	        }
 	    }, {
