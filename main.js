@@ -35826,10 +35826,10 @@
 	                this.score.score = this.highScore.highscore;
 	                var localHighscore = this.score.getHighScore();
 	                this.score.highScore = localHighscore > this.highScore.highscore ? localHighscore : this.highScore.highscore;
+	                this.score.id = this.highScore.id;
 	                this.score.update();
 	            }
 	
-	            this.score.id = this.highScore.id;
 	            this.score.getScores(true);
 	        }
 	    }, {
