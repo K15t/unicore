@@ -34894,25 +34894,27 @@
 	
 	            var includeOwnScore = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 	
-	            _browserRequest2.default.get('' + _constants2.default.REST_URL, function (error, response, body) {
-	                var scores = JSON.parse(body);
-	                var text = '';
-	                var firstScores = scores.slice(0, 10);
-	                for (var index in firstScores) {
-	                    var score = firstScores[index];
-	                    text += (0, _leftPad2.default)(parseInt(index) + 1, 3, ' ') + '. ' + _this.trimName(score.name) + ' - ' + (0, _leftPad2.default)(score.score, 7, 0) + '\n';
-	                }
-	                if (includeOwnScore && _this.id !== false) {
-	                    var id = scores.findIndex(function (el, index) {
-	                        return index + 1 == _this.id;
-	                    });
-	                    if (id > 10) {
-	                        text += (0, _leftPad2.default)(parseInt(id) + 1, 3, ' ') + '. ' + _this.trimName(scores[id].name) + ' - ' + (0, _leftPad2.default)(_this.score, 7, 0) + '\n';
+	            if (this.game.state.current == 'highscore') {
+	                _browserRequest2.default.get('' + _constants2.default.REST_URL, function (error, response, body) {
+	                    var scores = JSON.parse(body);
+	                    var text = '';
+	                    var firstScores = scores.slice(0, 10);
+	                    for (var index in firstScores) {
+	                        var score = firstScores[index];
+	                        text += (0, _leftPad2.default)(parseInt(index) + 1, 3, ' ') + '. ' + _this.trimName(score.name) + ' - ' + (0, _leftPad2.default)(score.score, 7, 0) + '\n';
 	                    }
-	                }
+	                    if (includeOwnScore && _this.id !== false) {
+	                        var id = scores.findIndex(function (el, index) {
+	                            return index + 1 == _this.id;
+	                        });
+	                        if (id > 10) {
+	                            text += (0, _leftPad2.default)(parseInt(id) + 1, 3, ' ') + '. ' + _this.trimName(scores[id].name) + ' - ' + (0, _leftPad2.default)(_this.score, 7, 0) + '\n';
+	                        }
+	                    }
 	
-	                _this.game.add.text(_this.game.width * .5, _this.game.height * .12, text, { fill: '#fff', boundsAlignV: 'center' });
-	            });
+	                    _this.game.add.text(_this.game.width * .5, _this.game.height * .12, text, { fill: '#fff', boundsAlignV: 'center' });
+	                });
+	            }
 	        }
 	    }, {
 	        key: 'trimName',

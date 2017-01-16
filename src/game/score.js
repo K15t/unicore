@@ -43,23 +43,25 @@ export default class Score {
     }
 
     getScores(includeOwnScore = false) {
-        request.get(`${constants.REST_URL}`, (error, response, body)=>{
-            var scores = JSON.parse(body)
-            var text = ''
-            var firstScores = scores.slice(0,10)
-            for (var index in firstScores) {
-                var score = firstScores[index]
-                text += `${leftPad(parseInt(index)+1,3,' ')}. ${this.trimName(score.name)} - ${leftPad(score.score,7,0)}\n`
-            }
-            if (includeOwnScore && this.id !== false) {
-                var id = scores.findIndex((el,index)=>index+1==this.id)
-                if (id > 10) {
-                    text += `${leftPad(parseInt(id)+1,3,' ')}. ${this.trimName(scores[id].name)} - ${leftPad(this.score,7,0)}\n`
+        if (this.game.state.current == 'highscore') {
+            request.get(`${constants.REST_URL}`, (error, response, body)=>{
+                var scores = JSON.parse(body)
+                var text = ''
+                var firstScores = scores.slice(0,10)
+                for (var index in firstScores) {
+                    var score = firstScores[index]
+                    text += `${leftPad(parseInt(index)+1,3,' ')}. ${this.trimName(score.name)} - ${leftPad(score.score,7,0)}\n`
                 }
-            }
+                if (includeOwnScore && this.id !== false) {
+                    var id = scores.findIndex((el,index)=>index+1==this.id)
+                    if (id > 10) {
+                        text += `${leftPad(parseInt(id)+1,3,' ')}. ${this.trimName(scores[id].name)} - ${leftPad(this.score,7,0)}\n`
+                    }
+                }
 
-            this.game.add.text(this.game.width*.5,this.game.height*.12, text, {fill:'#fff', boundsAlignV:'center'})
-        })
+                this.game.add.text(this.game.width*.5,this.game.height*.12, text, {fill:'#fff', boundsAlignV:'center'})
+            })
+        }
     }
 
     trimName(name) {
