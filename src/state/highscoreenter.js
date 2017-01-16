@@ -105,11 +105,7 @@ export default class HighscoreEnter extends BaseState {
         };
         var localScoreName = localStorage.getItem('name')
         if (localScoreName) {
-            if (typeof localScoreName == 'string') {
-                this.characters = localScoreName.split('')
-            } else {
-                this.characters = localScoreName
-            }
+            this.characters = localScoreName.split('')
         } else {
             this.characters = ('A,').repeat(constants.MAX_NAME_LENGTH).split(',').splice(0,constants.MAX_NAME_LENGTH)
         }
@@ -184,7 +180,7 @@ export default class HighscoreEnter extends BaseState {
     submit() {
         this.submitted = true
         this.startButtonText.text = 'Lift off!'
-        localStorage.setItem('name',this.characters)
+        localStorage.setItem('name',this.characters.join(''))
         new Promise((resolve, reject)=>{
             this.score.upload(this.highScore, this.characters.join(''), resolve)
         }).then(()=>{

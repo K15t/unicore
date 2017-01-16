@@ -36002,11 +36002,7 @@
 	            };
 	            var localScoreName = localStorage.getItem('name');
 	            if (localScoreName) {
-	                if (typeof localScoreName == 'string') {
-	                    this.characters = localScoreName.split('');
-	                } else {
-	                    this.characters = localScoreName;
-	                }
+	                this.characters = localScoreName.split('');
 	            } else {
 	                this.characters = 'A,'.repeat(_constants2.default.MAX_NAME_LENGTH).split(',').splice(0, _constants2.default.MAX_NAME_LENGTH);
 	            }
@@ -36085,7 +36081,7 @@
 	
 	            this.submitted = true;
 	            this.startButtonText.text = 'Lift off!';
-	            localStorage.setItem('name', this.characters);
+	            localStorage.setItem('name', this.characters.join(''));
 	            new Promise(function (resolve, reject) {
 	                _this4.score.upload(_this4.highScore, _this4.characters.join(''), resolve);
 	            }).then(function () {
