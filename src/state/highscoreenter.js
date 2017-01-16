@@ -24,30 +24,16 @@ export default class HighscoreEnter extends BaseState {
             boundsAlignH: 'center'
         };
 
-        this.startButton = game.add.button(game.world.centerX - 100, game.height*.8, 'startButton', ()=>{this.returnToStart()});
+        this.startButton = game.add.button(game.world.centerX - 100, game.height*.8, 'startButton', ()=>{this.submit()});
         this.startButtonText = game.add.text(game.world.centerX - 20, game.height*.825, '  Submit',buttonTextStyle);
 
-        this.submitted = false
-        this.started = false
-        this.isPlaying = false
-
-        if (!this.submitted && this.highScore) {
-            this.drawHighscoreEnter()
-        } else if (!this.started) {
-            this.game.input.keyboard.addCallbacks(this.game,()=>{},(e)=>{
-                if (e.key == 'Enter') {
-                    this.returnToStart()
-                }
-            })
-        }
+        this.drawHighscoreEnter()
 
         if (this.highScore) {
             this.score.score = this.highScore
             const localHighscore = this.score.getHighScore()
             this.score.highScore = localHighscore > this.highScore ? localHighscore : this.highScore
             this.score.update()
-        } else {
-            //this.score.getScores()
         }
 
     }
@@ -168,12 +154,7 @@ export default class HighscoreEnter extends BaseState {
         })
     }
 
-    returnToStart() {
-        this.state.start('game', true, false, this.highScore)
-    }
-
     submit() {
-        this.submitted = true
         this.startButtonText.text = 'Lift off!'
         localStorage.setItem('name',this.characters.join(''))
         new Promise((resolve, reject)=>{

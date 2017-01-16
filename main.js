@@ -35919,31 +35919,17 @@
 	            };
 	
 	            this.startButton = game.add.button(game.world.centerX - 100, game.height * .8, 'startButton', function () {
-	                _this2.returnToStart();
+	                _this2.submit();
 	            });
 	            this.startButtonText = game.add.text(game.world.centerX - 20, game.height * .825, '  Submit', buttonTextStyle);
 	
-	            this.submitted = false;
-	            this.started = false;
-	            this.isPlaying = false;
-	
-	            if (!this.submitted && this.highScore) {
-	                this.drawHighscoreEnter();
-	            } else if (!this.started) {
-	                this.game.input.keyboard.addCallbacks(this.game, function () {}, function (e) {
-	                    if (e.key == 'Enter') {
-	                        _this2.returnToStart();
-	                    }
-	                });
-	            }
+	            this.drawHighscoreEnter();
 	
 	            if (this.highScore) {
 	                this.score.score = this.highScore;
 	                var localHighscore = this.score.getHighScore();
 	                this.score.highScore = localHighscore > this.highScore ? localHighscore : this.highScore;
 	                this.score.update();
-	            } else {
-	                //this.score.getScores()
 	            }
 	        }
 	    }, {
@@ -36072,16 +36058,10 @@
 	            });
 	        }
 	    }, {
-	        key: 'returnToStart',
-	        value: function returnToStart() {
-	            this.state.start('game', true, false, this.highScore);
-	        }
-	    }, {
 	        key: 'submit',
 	        value: function submit() {
 	            var _this4 = this;
 	
-	            this.submitted = true;
 	            this.startButtonText.text = 'Lift off!';
 	            localStorage.setItem('name', this.characters.join(''));
 	            new Promise(function (resolve, reject) {
