@@ -34319,12 +34319,17 @@
 	
 	var _highscore2 = _interopRequireDefault(_highscore);
 	
+	var _highscoreenter = __webpack_require__(21);
+	
+	var _highscoreenter2 = _interopRequireDefault(_highscoreenter);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
 	    menu: _menu2.default,
 	    game: _game2.default,
-	    highscore: _highscore2.default
+	    highscore: _highscore2.default,
+	    highscoreenter: _highscoreenter2.default
 	};
 
 /***/ },
@@ -35731,7 +35736,7 @@
 	    }, {
 	        key: 'gameover',
 	        value: function gameover() {
-	            this.state.start('highscore', true, false, this.score.score);
+	            this.state.start('highscoreenter', true, false, this.score.score);
 	        }
 	    }, {
 	        key: 'shutdown',
@@ -35798,7 +35803,6 @@
 	            _get(Highscore.prototype.__proto__ || Object.getPrototypeOf(Highscore.prototype), 'create', this).call(this);
 	
 	            var game = this.game;
-	            this.notice = game.add.text(game.world.centerX - 20, game.height * .95, '', { fill: "#ffffff", font: '20px Bungee', boundsAlignV: 'middle', boundsAlignH: 'center' });
 	
 	            var buttonTextStyle = {
 	                fill: '#FFFFFF',
@@ -35811,6 +35815,106 @@
 	                _this2.returnToStart();
 	            });
 	            this.startButtonText = game.add.text(game.world.centerX - 20, game.height * .825, 'Lift off!', buttonTextStyle);
+	
+	            this.game.input.keyboard.addCallbacks(this.game, function () {}, function (e) {
+	                if (e.key == 'Enter') {
+	                    _this2.returnToStart();
+	                }
+	            });
+	
+	            this.score.getScores(true);
+	        }
+	    }, {
+	        key: 'returnToStart',
+	        value: function returnToStart() {
+	            this.started = true;
+	            this.state.start('game', true, false, this.highScore);
+	        }
+	    }, {
+	        key: 'update',
+	        value: function update() {
+	            _get(Highscore.prototype.__proto__ || Object.getPrototypeOf(Highscore.prototype), 'update', this).call(this);
+	            // go to different state with this.state.start()
+	            // this.state.start('game');
+	        }
+	    }, {
+	        key: 'shutdown',
+	        value: function shutdown() {}
+	    }]);
+	
+	    return Highscore;
+	}(_base2.default);
+	
+	exports.default = Highscore;
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+	
+	var _base = __webpack_require__(12);
+	
+	var _base2 = _interopRequireDefault(_base);
+	
+	var _constants = __webpack_require__(14);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var HighscoreEnter = function (_BaseState) {
+	    _inherits(HighscoreEnter, _BaseState);
+	
+	    function HighscoreEnter() {
+	        _classCallCheck(this, HighscoreEnter);
+	
+	        return _possibleConstructorReturn(this, (HighscoreEnter.__proto__ || Object.getPrototypeOf(HighscoreEnter)).apply(this, arguments));
+	    }
+	
+	    _createClass(HighscoreEnter, [{
+	        key: 'init',
+	        value: function init(score) {
+	            this.highScore = score;
+	        }
+	    }, {
+	        key: 'preload',
+	        value: function preload() {}
+	    }, {
+	        key: 'create',
+	        value: function create() {
+	            var _this2 = this;
+	
+	            _get(HighscoreEnter.prototype.__proto__ || Object.getPrototypeOf(HighscoreEnter.prototype), 'create', this).call(this);
+	
+	            var game = this.game;
+	            this.notice = game.add.text(game.world.centerX - 20, game.height * .95, '', { fill: "#ffffff", font: '20px Bungee', boundsAlignV: 'middle', boundsAlignH: 'center' });
+	
+	            var buttonTextStyle = {
+	                fill: '#FFFFFF',
+	                font: '30px Bungee',
+	                boundsAlignV: 'middle',
+	                boundsAlignH: 'center'
+	            };
+	
+	            this.startButton = game.add.button(game.world.centerX - 100, game.height * .8, 'startButton', function () {
+	                _this2.returnToStart();
+	            });
+	            this.startButtonText = game.add.text(game.world.centerX - 20, game.height * .825, '  Submit', buttonTextStyle);
 	
 	            this.submitted = false;
 	            this.started = false;
@@ -35827,12 +35931,6 @@
 	            }
 	
 	            if (this.highScore) {
-	                this.startButtonText.text = '  Submit';
-	                this.name = localStorage.getItem('name') || '';
-	                if (this.name.length < 1) {
-	                    this.notice.text = 'Enter your name';
-	                }
-	
 	                this.score.score = this.highScore;
 	                var localHighscore = this.score.getHighScore();
 	                this.score.highScore = localHighscore > this.highScore ? localHighscore : this.highScore;
@@ -35902,7 +36000,16 @@
 	                boundsAlignV: 'middle',
 	                boundsAlignH: 'center'
 	            };
-	            this.characters = 'A,'.repeat(_constants2.default.MAX_NAME_LENGTH).split(',').splice(0, _constants2.default.MAX_NAME_LENGTH);
+	            var localScoreName = localStorage.getItem('name');
+	            if (localScoreName) {
+	                if (typeof localScoreName == 'string') {
+	                    this.characters = localScoreName.split('');
+	                } else {
+	                    this.characters = localScoreName;
+	                }
+	            } else {
+	                this.characters = 'A,'.repeat(_constants2.default.MAX_NAME_LENGTH).split(',').splice(0, _constants2.default.MAX_NAME_LENGTH);
+	            }
 	            this.selectedCharacter = 0;
 	            this.activeCharacter = [];
 	            this.characterGraphics = [];
@@ -35978,17 +36085,17 @@
 	
 	            this.submitted = true;
 	            this.startButtonText.text = 'Lift off!';
+	            localStorage.setItem('name', this.characters);
 	            new Promise(function (resolve, reject) {
-	                localStorage.setItem('name', _this4.name);
-	                _this4.score.upload(_this4.highScore, _this4.name, resolve);
+	                _this4.score.upload(_this4.highScore, _this4.characters.join(''), resolve);
 	            }).then(function () {
-	                _this4.score.getScores(true);
+	                _this4.state.start('highscore', true, false, _this4.highScore);
 	            });
 	        }
 	    }, {
 	        key: 'update',
 	        value: function update() {
-	            _get(Highscore.prototype.__proto__ || Object.getPrototypeOf(Highscore.prototype), 'update', this).call(this);
+	            _get(HighscoreEnter.prototype.__proto__ || Object.getPrototypeOf(HighscoreEnter.prototype), 'update', this).call(this);
 	            // go to different state with this.state.start()
 	            // this.state.start('game');
 	        }
@@ -35997,10 +36104,10 @@
 	        value: function shutdown() {}
 	    }]);
 	
-	    return Highscore;
+	    return HighscoreEnter;
 	}(_base2.default);
 	
-	exports.default = Highscore;
+	exports.default = HighscoreEnter;
 
 /***/ }
 /******/ ]);
