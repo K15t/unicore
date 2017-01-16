@@ -32,6 +32,13 @@ export default class Highscore extends BaseState {
             }
         })
 
+        if (this.highScore) {
+            this.score.score = this.highScore
+            const localHighscore = this.score.getHighScore()
+            this.score.highScore = localHighscore > this.highScore ? localHighscore : this.highScore
+            this.score.update()
+        }
+
         this.score.getScores(true)
 
     }

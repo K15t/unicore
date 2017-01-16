@@ -35822,6 +35822,13 @@
 	                }
 	            });
 	
+	            if (this.highScore) {
+	                this.score.score = this.highScore;
+	                var localHighscore = this.score.getHighScore();
+	                this.score.highScore = localHighscore > this.highScore ? localHighscore : this.highScore;
+	                this.score.update();
+	            }
+	
 	            this.score.getScores(true);
 	        }
 	    }, {
