@@ -48,12 +48,12 @@
 	
 	__webpack_require__(1);
 	
-	window.PIXI = __webpack_require__(6);
-	window.p2 = __webpack_require__(7);
-	window.Phaser = __webpack_require__(8);
+	window.PIXI = __webpack_require__(5);
+	window.p2 = __webpack_require__(6);
+	window.Phaser = __webpack_require__(7);
 	
-	var gameStates = __webpack_require__(10).default;
-	var constants = __webpack_require__(14);
+	var gameStates = __webpack_require__(9).default;
+	var constants = __webpack_require__(13);
 	
 	var game = new Phaser.Game(constants.CANVASWIDTH, // width
 	constants.CANVASHEIGHT, // height
@@ -105,7 +105,7 @@
 	var content = __webpack_require__(2);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(5)(content, {});
+	var update = __webpack_require__(4)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -127,10 +127,10 @@
 
 	exports = module.exports = __webpack_require__(3)();
 	// imports
-	exports.i(__webpack_require__(4), "");
+	
 	
 	// module
-	exports.push([module.id, "\n", ""]);
+	exports.push([module.id, "canvas {\n  margin: auto;\n}\n", ""]);
 	
 	// exports
 
@@ -192,20 +192,6 @@
 
 /***/ },
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "/*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */\n\n/**\n * 1. Change the default font family in all browsers (opinionated).\n * 2. Correct the line height in all browsers.\n * 3. Prevent adjustments of font size after orientation changes in IE and iOS.\n */\n\nhtml {\n  font-family: sans-serif; /* 1 */\n  line-height: 1.15; /* 2 */\n  -ms-text-size-adjust: 100%; /* 3 */\n  -webkit-text-size-adjust: 100%; /* 3 */\n}\n\n/**\n * Remove the margin in all browsers (opinionated).\n */\n\nbody {\n  margin: 0;\n}\n\n/* HTML5 display definitions\n   ========================================================================== */\n\n/**\n * Add the correct display in IE 9-.\n * 1. Add the correct display in Edge, IE, and Firefox.\n * 2. Add the correct display in IE.\n */\n\narticle,\naside,\ndetails, /* 1 */\nfigcaption,\nfigure,\nfooter,\nheader,\nmain, /* 2 */\nmenu,\nnav,\nsection,\nsummary { /* 1 */\n  display: block;\n}\n\n/**\n * Add the correct display in IE 9-.\n */\n\naudio,\ncanvas,\nprogress,\nvideo {\n  display: inline-block;\n}\n\n/**\n * Add the correct display in iOS 4-7.\n */\n\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\n\nprogress {\n  vertical-align: baseline;\n}\n\n/**\n * Add the correct display in IE 10-.\n * 1. Add the correct display in IE.\n */\n\ntemplate, /* 1 */\n[hidden] {\n  display: none;\n}\n\n/* Links\n   ========================================================================== */\n\n/**\n * 1. Remove the gray background on active links in IE 10.\n * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.\n */\n\na {\n  background-color: transparent; /* 1 */\n  -webkit-text-decoration-skip: objects; /* 2 */\n}\n\n/**\n * Remove the outline on focused links when they are also active or hovered\n * in all browsers (opinionated).\n */\n\na:active,\na:hover {\n  outline-width: 0;\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * 1. Remove the bottom border in Firefox 39-.\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\n\nabbr[title] {\n  border-bottom: none; /* 1 */\n  text-decoration: underline; /* 2 */\n  text-decoration: underline dotted; /* 2 */\n}\n\n/**\n * Prevent the duplicate application of `bolder` by the next rule in Safari 6.\n */\n\nb,\nstrong {\n  font-weight: inherit;\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/**\n * Add the correct font style in Android 4.3-.\n */\n\ndfn {\n  font-style: italic;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/**\n * Add the correct background and color in IE 9-.\n */\n\nmark {\n  background-color: #ff0;\n  color: #000;\n}\n\n/**\n * Add the correct font size in all browsers.\n */\n\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove the border on images inside links in IE 10-.\n */\n\nimg {\n  border-style: none;\n}\n\n/**\n * Hide the overflow in IE.\n */\n\nsvg:not(:root) {\n  overflow: hidden;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\ncode,\nkbd,\npre,\nsamp {\n  font-family: monospace, monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/**\n * Add the correct margin in IE 8.\n */\n\nfigure {\n  margin: 1em 40px;\n}\n\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\n\nhr {\n  box-sizing: content-box; /* 1 */\n  height: 0; /* 1 */\n  overflow: visible; /* 2 */\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * 1. Change font properties to `inherit` in all browsers (opinionated).\n * 2. Remove the margin in Firefox and Safari.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font: inherit; /* 1 */\n  margin: 0; /* 2 */\n}\n\n/**\n * Restore the font weight unset by the previous rule.\n */\n\noptgroup {\n  font-weight: bold;\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\n\nbutton,\ninput { /* 1 */\n  overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\n\nbutton,\nselect { /* 1 */\n  text-transform: none;\n}\n\n/**\n * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`\n *    controls in Android 4.\n * 2. Correct the inability to style clickable types in iOS and Safari.\n */\n\nbutton,\nhtml [type=\"button\"], /* 1 */\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button; /* 2 */\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\n\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n\n/**\n * Change the border, margin, and padding in all browsers (opinionated).\n */\n\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\n\nlegend {\n  box-sizing: border-box; /* 1 */\n  color: inherit; /* 2 */\n  display: table; /* 1 */\n  max-width: 100%; /* 1 */\n  padding: 0; /* 3 */\n  white-space: normal; /* 1 */\n}\n\n/**\n * Remove the default vertical scrollbar in IE.\n */\n\ntextarea {\n  overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10-.\n * 2. Remove the padding in IE 10-.\n */\n\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n\n[type=\"search\"] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/**\n * Remove the inner padding and cancel buttons in Chrome and Safari on OS X.\n */\n\n[type=\"search\"]::-webkit-search-cancel-button,\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * Correct the text style of placeholders in Chrome, Edge, and Safari.\n */\n\n::-webkit-input-placeholder {\n  color: inherit;\n  opacity: 0.54;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -457,7 +443,7 @@
 
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";/**
@@ -3168,7 +3154,7 @@
 	 */if(true){if(typeof module!=='undefined'&&module.exports){exports=module.exports=PIXI;}exports.PIXI=PIXI;}else if(typeof define!=='undefined'&&define.amd){define('PIXI',function(){return root.PIXI=PIXI;}());}else{root.PIXI=PIXI;}return PIXI;}).call(undefined);
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var require;/* WEBPACK VAR INJECTION */(function(global) {"use strict";var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};/**
@@ -7778,7 +7764,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};/**
@@ -34109,10 +34095,10 @@
 	*/if(true){if(typeof module!=='undefined'&&module.exports){exports=module.exports=Phaser;}exports.Phaser=Phaser;}else if(typeof define!=='undefined'&&define.amd){define('Phaser',function(){return root.Phaser=Phaser;}());}else{root.Phaser=Phaser;}return Phaser;}).call(undefined);/*
 	* "What matters in this life is not what we do but what we do for others, the legacy we leave and the imprint we make." - Eric Meyer
 	*/
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34298,7 +34284,7 @@
 	};
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34307,19 +34293,19 @@
 	    value: true
 	});
 	
-	var _menu = __webpack_require__(11);
+	var _menu = __webpack_require__(10);
 	
 	var _menu2 = _interopRequireDefault(_menu);
 	
-	var _game = __webpack_require__(19);
+	var _game = __webpack_require__(18);
 	
 	var _game2 = _interopRequireDefault(_game);
 	
-	var _highscore = __webpack_require__(20);
+	var _highscore = __webpack_require__(19);
 	
 	var _highscore2 = _interopRequireDefault(_highscore);
 	
-	var _highscoreenter = __webpack_require__(21);
+	var _highscoreenter = __webpack_require__(20);
 	
 	var _highscoreenter2 = _interopRequireDefault(_highscoreenter);
 	
@@ -34333,7 +34319,7 @@
 	};
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34346,7 +34332,7 @@
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _base = __webpack_require__(12);
+	var _base = __webpack_require__(11);
 	
 	var _base2 = _interopRequireDefault(_base);
 	
@@ -34409,7 +34395,7 @@
 	exports.default = Menu;
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34420,19 +34406,19 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _world = __webpack_require__(13);
+	var _world = __webpack_require__(12);
 	
 	var _world2 = _interopRequireDefault(_world);
 	
-	var _score = __webpack_require__(15);
+	var _score = __webpack_require__(14);
 	
 	var _score2 = _interopRequireDefault(_score);
 	
-	var _player = __webpack_require__(18);
+	var _player = __webpack_require__(17);
 	
 	var _player2 = _interopRequireDefault(_player);
 	
-	var _constants = __webpack_require__(14);
+	var _constants = __webpack_require__(13);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -34595,7 +34581,7 @@
 	exports.default = Base;
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34606,7 +34592,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _constants = __webpack_require__(14);
+	var _constants = __webpack_require__(13);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -34777,7 +34763,7 @@
 	exports.default = World;
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34814,7 +34800,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34825,15 +34811,15 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _leftPad = __webpack_require__(16);
+	var _leftPad = __webpack_require__(15);
 	
 	var _leftPad2 = _interopRequireDefault(_leftPad);
 	
-	var _browserRequest = __webpack_require__(17);
+	var _browserRequest = __webpack_require__(16);
 	
 	var _browserRequest2 = _interopRequireDefault(_browserRequest);
 	
-	var _constants = __webpack_require__(14);
+	var _constants = __webpack_require__(13);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -34948,7 +34934,7 @@
 	exports.default = Score;
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports) {
 
 	/* This program is free software. It comes without any warranty, to
@@ -34995,7 +34981,7 @@
 	}
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -35471,7 +35457,7 @@
 	//UMD FOOTER END
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35482,7 +35468,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _constants = __webpack_require__(14);
+	var _constants = __webpack_require__(13);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -35658,7 +35644,7 @@
 	exports.default = Player;
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35671,23 +35657,23 @@
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _world = __webpack_require__(13);
+	var _world = __webpack_require__(12);
 	
 	var _world2 = _interopRequireDefault(_world);
 	
-	var _score = __webpack_require__(15);
+	var _score = __webpack_require__(14);
 	
 	var _score2 = _interopRequireDefault(_score);
 	
-	var _player = __webpack_require__(18);
+	var _player = __webpack_require__(17);
 	
 	var _player2 = _interopRequireDefault(_player);
 	
-	var _base = __webpack_require__(12);
+	var _base = __webpack_require__(11);
 	
 	var _base2 = _interopRequireDefault(_base);
 	
-	var _constants = __webpack_require__(14);
+	var _constants = __webpack_require__(13);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -35751,7 +35737,7 @@
 	exports.default = Game;
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35764,11 +35750,11 @@
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _base = __webpack_require__(12);
+	var _base = __webpack_require__(11);
 	
 	var _base2 = _interopRequireDefault(_base);
 	
-	var _constants = __webpack_require__(14);
+	var _constants = __webpack_require__(13);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -35858,7 +35844,7 @@
 	exports.default = Highscore;
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35871,11 +35857,11 @@
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _base = __webpack_require__(12);
+	var _base = __webpack_require__(11);
 	
 	var _base2 = _interopRequireDefault(_base);
 	
-	var _constants = __webpack_require__(14);
+	var _constants = __webpack_require__(13);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
