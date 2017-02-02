@@ -130,7 +130,7 @@
 	exports.i(__webpack_require__(4), "");
 	
 	// module
-	exports.push([module.id, "canvas {\n  margin: auto;\n}\n", ""]);
+	exports.push([module.id, "canvas {\n  margin: auto;\n}\nhtml {\n  overflow: hidden;\n}\n", ""]);
 	
 	// exports
 
