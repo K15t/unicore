@@ -34627,7 +34627,7 @@
 	
 	        this.background = this.game.add.group();
 	        this.background.create(0, 0, 'sky');
-	        this.background.create(this.background.width - 1, 0, 'sky'); //-1 for firefox
+	        this.background.create(this.background.width, 0, 'sky');
 	
 	        this.obstacles = [];
 	        this.pickups = [];
@@ -34768,6 +34768,7 @@
 	        value: function accellerate() {
 	            this.velocity += .1;
 	            this.x += this.velocity;
+	            console.log(this.velocity);
 	        }
 	    }]);
 	
@@ -34810,7 +34811,7 @@
 	    POWERUPS: ['OFCE', 'VSN', 'ALX', 'BAC', 'TRSL'],
 	    OBSTACLES: ['feindbild1', 'feindbild2', 'feindbild3'],
 	
-	    REST_URL: 'https://happy-css.com/unicore-scores/'
+	    REST_URL: 'https://happy-css.com/old-happy-css2016/unicore-scores/'
 	};
 
 /***/ },
