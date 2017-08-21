@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MartinMuzatko/unicore.git"
+    "url": "git+https://github.com/K15t/unicore.git"
   },
   "author": "Martin Muzatko",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MartinMuzatko/unicore/issues"
+    "url": "https://github.com/K15t/unicore/issues"
   },
-  "homepage": "https://github.com/MartinMuzatko/unicore#readme",
+  "homepage": "https://github.com/K15t/unicore#readme",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel": "^6.5.2",
